@@ -57,8 +57,12 @@ code {
 }
 
 .flights-button,
-.stays-button {
+.stays-button,
+.promo-button,
+.show-button {
   display: flex;
+  background: none;
+  border: none;
   gap: 0.5em;
   text-decoration: none;
   color: white;
@@ -120,8 +124,7 @@ code {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  color: white;
-    font-family: "Montserrat",
+  font-family: "Montserrat",
       sans-serif;
   display: flex;
   flex-direction: column;
@@ -143,4 +146,113 @@ code {
 .text3 {
   font-size: 2em;
     font-weight: 600;
+}
+
+.search {
+  background-color: white;
+  width: 60%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 72%;
+  left: 50%;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-flex {
+  display: flex;
+  padding-left: 1em;
+  padding-right: 1em;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+
+.from-to,
+.trip,
+.depart-return,
+.passenger-class {
+  display: flex;
+  flex-direction: column;
+}
+
+.head-buttons-flex,
+.bottom-buttons-flex {
+  display: flex;
+  gap: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.head-buttons-flex .flights-button::after {
+  content: "";
+  display: block;
+  width: 0.1em;
+  height: 3em;
+  background-color: #ccc;
+  margin-left: 1em;
+}
+
+.bottom-buttons-flex {
+  justify-content: flex-end;
+  
+}
+
+.promo-button,
+.show-button {
+  font-family: "Montserrat",
+    sans-serif;
+  font-weight: 400;
+}
+
+.show-button {
+  background-color: rgba(105, 199, 179);
+  border-radius: 10px;
+  height: 3em;
+  width: 7em;
+  border: none;
+  justify-content: center;
+}
+
+.from-to,
+.depart-return,
+.passenger-class {
+  width: 30%;
+}
+
+.from-to-label {
+  width: 6em;
+}
+
+.trip-label {
+  width: 3em;
+}
+
+.depart-return-label {
+  width: 8.5em;
+}
+
+.passenger-class-label {
+  width: 9.5em;
+}
+
+label {
+  font-family: "Montserrat",
+      sans-serif;
+  background: white;
+  font-weight: 300;
+  font-size: 0.8em;
+  margin-left: 1em;
+  margin-bottom: -0.6em;
+  z-index: 1;
+  text-align: center;
+}
+
+input {
+  height: 2em;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 3px;
 }
