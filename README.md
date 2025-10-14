@@ -39,6 +39,35 @@
 # 2 диаграмма C4:
 <img src="diagrams/container-diagram.jpg?update=1" alt="container-diagram" height="500"/>
 
+### Контракты API
+* Бронирование: 
+``` 
+ GET https://whitelabel.travel.yandex-net.ru/hotels/suggest/
+   ? query=<string>
+   & [region_limit=<integer>]
+   & [hotel_limit=<integer>]
+   & [affiliate_clid=<string>]
+```
+
+* Maps/POI:
+```
+GET https://search-maps.yandex.ru/v1/
+  ? apikey=<string>
+  & text=<string>
+```
+
+* Weather:
+```
+GET "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41
+&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m" 
+```
+
+* Flights:
+```
+GET https://api.aviationstack.com/v1/flights
+    ? access_key = YOUR_ACCESS_KEY
+```
+
 ### Нефункциональные требования
 * Время отклика: Среднее время отклика API не должно превышать **500 мс**.
 * Доступность: Сервис должен быть доступен **99.9% времени**.
