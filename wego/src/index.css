@@ -208,7 +208,7 @@ code {
 }
 
 .show-button {
-  background-color: rgba(105, 199, 179);
+  background-color: #69c7b3;
   border-radius: 10px;
   height: 3em;
   width: 7em;
@@ -255,4 +255,78 @@ input {
   padding: 0.5rem;
   border: 1px solid black;
   border-radius: 3px;
+}
+
+/* Footer Styles */
+.footer {
+  padding: 3rem 1rem;
+  margin-top: 4rem;
+  background-color: #8cd3bb; /* ← нужный цвет фона */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-col {
+  width: 18%;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contact {
+  text-align: right;
+}
+
+.footer-heading {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.4rem;
+}
+
+.footer-link {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #333;
+}
+
+.footer-logo {
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.3rem 0;
+}
+
+.footer-copyright {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  color: #777;
 }
