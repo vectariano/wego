@@ -33,10 +33,10 @@
   * Входящий: Невысокий, в основном запросы от клиента (JSON).
   * Исходящий: Высокий, так как сервер отдает клиенту большие объемы данных: списки жилья, фотографии и тд.
 
-# 1 диаграмма C4:
+### 1 диаграмма C4:
 <img src="diagrams/system-context-diagram.jpg" alt="system-context-diagram" height="500"/>
 
-# 2 диаграмма C4:
+### 2 диаграмма C4:
 <img src="diagrams/container-diagram.jpg?update=1" alt="container-diagram" height="500"/>
 
 ### Контракты API
