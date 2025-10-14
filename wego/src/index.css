@@ -10,17 +10,17 @@
 }
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Montserrat",
+    sans-serif;
 }
 
 .header-flex {
@@ -49,6 +49,7 @@ code {
   /* margin-right: auto; */
   justify-content: flex-start;
   gap: 2em;
+  cursor: pointer;
 }
 
 .plane-img, .sleep-img {
@@ -70,6 +71,7 @@ code {
       sans-serif;
   font-weight: 600;
   align-items: center;
+  cursor: pointer;
 }
 
 .user-corner {
@@ -150,7 +152,7 @@ code {
 
 .search {
   background-color: white;
-  width: 60%;
+  width: 70%;
   transform: translate(-50%, -50%);
   position: absolute;
   top: 72%;
@@ -163,17 +165,26 @@ code {
   display: flex;
   padding-left: 1em;
   padding-right: 1em;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5em;
 }
 
 
 .from-to,
-.trip,
 .depart-return,
 .passenger-class {
   display: flex;
   flex-direction: column;
+  flex: 1 1 20em;
+  min-width: 18em;
+}
+
+.trip {
+  display: flex;
+    flex-direction: column;
+  flex: 0 1 10em;
+  min-width: 8em;
 }
 
 .head-buttons-flex,
@@ -257,11 +268,75 @@ input {
   border-radius: 3px;
 }
 
-/* Footer Styles */
+.flights-hotels-flex {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  margin-top: 15vh;
+  flex-wrap: wrap;
+}
+
+.airport-img,
+.hotels-img {
+  position: relative;
+}
+
+.airport-hotel-img {
+  border-radius: 30px;
+  height: 34vw;
+  aspect-ratio: 1 / 1;
+  width: 34vw;
+  object-fit: cover;
+  filter: brightness(70%);
+}
+
+
+.airport-hotel-text {
+  color: white;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Montserrat",
+      sans-serif;
+  font-weight:400;
+  font-size: 4vw;
+  text-align: center;
+}
+
+.search-airport-hotel-text {
+  position: absolute;
+  width: 80%;
+  color: white;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Montserrat",
+      sans-serif;
+  font-weight: 300;
+  font-size: 1vw;
+  text-align: center;
+}
+
+.airport-img .show-button,
+.hotels-img .show-button {
+  position: absolute;
+  color: black;
+  top: 85%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  width: 7vw;
+  height: 2vw;
+  font-size: 0.7vw;
+  cursor: pointer;
+}
+
 .footer {
   padding: 3rem 1rem;
   margin-top: 4rem;
-  background-color: #8cd3bb; /* ← нужный цвет фона */
+  background-color: #8cd3bb; 
 }
 
 .footer-container {

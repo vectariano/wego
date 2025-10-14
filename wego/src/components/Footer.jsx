@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../static/img/logo.png";
+import logo from "../static/img/logo-black-fix.png";
 
 function Footer() {
   return (
@@ -50,7 +50,7 @@ function Footer() {
       </div>
 
       <div className="footer-copyright">
-        © 2025 Wego. Made with for travelers.
+        © 2025 Wego. By travelers for travelers.
       </div>
     </footer>
   );
