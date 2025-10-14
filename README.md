@@ -37,6 +37,7 @@
 <img src="diagrams/system-context-diagram.jpg" alt="system-context-diagram" height="500"/>
 
 # 2 диаграмма C4:
+<img src="diagrams/container-diagram.jpg?update=1" alt="container-diagram" height="500"/>
 
 ### Нефункциональные требования
 * Время отклика: Среднее время отклика API не должно превышать **500 мс**.
