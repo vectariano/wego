@@ -46,7 +46,6 @@ code {
 .left-flex-navigation {
   display: flex;
   padding-left: 6em;
-  /* margin-right: auto; */
   justify-content: flex-start;
   gap: 2em;
   cursor: pointer;
@@ -77,7 +76,6 @@ code {
 .user-corner {
   display: flex;
   padding-right: 6em;
-  /* margin-left: auto; */
   justify-content: flex-end;
   gap: 2em;
 }
@@ -122,17 +120,17 @@ code {
 
 .greet-string {
   position: absolute;
-  top: 50%;
+  top: 55%; 
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%); 
   color: white;
-  font-family: "Montserrat",
-      sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   z-index: 2;
+  padding-top: 3rem;
 }
 
 .text1 {
@@ -153,12 +151,13 @@ code {
 .search {
   background-color: white;
   width: 70%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 72%;
-  left: 50%;
+  margin: 0 auto;
+  padding: 1.5rem 2rem; 
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative; 
+  z-index: 2;
+  margin-top: 4rem;
 }
 
 .search-flex {
@@ -580,6 +579,9 @@ input {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
+  width: 100%; 
+  max-width: 250px; 
+  margin: 0.5rem; 
 }
 
 .destination-card:hover {
@@ -639,3 +641,292 @@ input {
 .book-button:hover {
   background-color: #52a994;
 }
+
+@media (max-width: 768px) {
+  .bg-img {
+    height: 50vh; 
+    width: 100%; 
+    border-radius: 15px; 
+  }
+
+  .greet-string {
+    transform: translate(-50%, -40%);
+    padding: 0 1rem;
+  }
+
+  .text1 {
+    font-size: 2.5em; 
+    font-weight: 500;
+  }
+
+  .text2 {
+    font-size: 4em; 
+    font-weight: 600;
+  }
+
+  .text3 {
+    font-size: 1.5em; 
+    font-weight: 600;
+  }
+
+  .search {
+    width: 90%;
+    top: 75%; 
+    border-radius: 15px;
+    padding: 1rem;
+  }
+
+  .search-flex {
+    gap: 1em;
+    padding: 0.5rem;
+  }
+
+  .from-to,
+  .depart-return,
+  .passenger-class {
+    flex: 1 1 auto;
+    min-width: 15em;
+    width: 100%;
+  }
+
+  .trip {
+    width: 100%;
+  }
+
+  .head-buttons-flex .flights-button::after {
+    display: none; 
+  }
+
+  .bottom-buttons-flex {
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .show-button {
+    width: 8em;
+    height: 2.5em;
+    font-size: 0.9em;
+  }
+
+  .hero-text {
+    top: 15%;
+    left: 5%;
+    max-width: 90%;
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
+  }
+
+  .header-flex,
+  .landing-header {
+    padding-top: 1em;
+  }
+
+  .left-flex-navigation,
+  .landing-nav {
+    padding-left: 1em;
+    gap: 1em;
+  }
+
+  .user-corner,
+  .landing-auth {
+    padding-right: 1em;
+    gap: 1em;
+  }
+
+  .main-logo {
+    height: 5em;
+  }
+
+  .plane-img,
+  .sleep-img {
+    height: 1.2em;
+  }
+
+  .login,
+  .loginik {
+    font-size: 0.9em;
+  }
+
+  .signup,
+  .signupik {
+    width: 6em;
+    height: 2.5em;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .bg-img {
+    height: 40vh;
+    border-radius: 10px;
+  }
+
+  .greet-string {
+    top: 35%;
+    transform: translate(-50%, -35%);
+  }
+
+  .text1 {
+    font-size: 2em;
+  }
+
+  .text2 {
+    font-size: 3em;
+  }
+
+  .text3 {
+    font-size: 1.2em;
+  }
+
+  .search {
+    width: 95%;
+    top: 80%;
+    padding: 0.8rem;
+  }
+
+  .search-flex {
+    flex-direction: column;
+    gap: 0.8em;
+  }
+
+  .from-to,
+  .depart-return,
+  .passenger-class,
+  .trip {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .show-button {
+    width: 7em;
+    height: 2.2em;
+    font-size: 0.8em;
+  }
+
+  .hero-text {
+    top: 10%;
+    left: 3%;
+    max-width: 95%;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .main-logo {
+    height: 4em;
+  }
+
+  .plane-img,
+  .sleep-img {
+    height: 1em;
+  }
+
+  .login,
+  .loginik {
+    font-size: 0.8em;
+  }
+
+  .signup,
+  .signupik {
+    width: 5.5em;
+    height: 2.2em;
+    font-size: 0.8em;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .search {
+    margin-bottom: 2rem;
+  }
+
+  .flights-hotels-flex {
+    margin-top: 8vh; 
+    width: 90%;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .airport-hotel-img {
+    height: 25vw;
+    width: 25vw;
+    font-size: 0.8rem; 
+  }
+
+  .airport-hotel-text {
+    font-size: 2.5vw;
+    top: 55%;
+  }
+
+  .search-airport-hotel-text {
+    font-size: 0.8vw;
+    top: 70%;
+  }
+
+  .airport-img .show-button,
+  .hotels-img .show-button {
+    width: 8vw;
+    height: 2vw;
+    font-size: 0.6vw;
+    top: 80%; 
+  }
+
+  .flights-hotels-flex {
+    position: relative;
+    z-index: 1;
+  }
+
+  .search {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .search {
+    margin-bottom: 3rem; 
+  }
+
+  .flights-hotels-flex {
+    margin-top: 10vh;
+    width: 95%;
+    gap: 0.5rem;
+  }
+
+  .airport-hotel-img {
+    height: 30vw;
+    width: 30vw;
+    font-size: 0.7rem;
+  }
+
+  .airport-hotel-text {
+    font-size: 2vw;
+    top: 50%;
+  }
+
+  .search-airport-hotel-text {
+    font-size: 0.6vw;
+    top: 65%;
+  }
+
+  .airport-img .show-button,
+  .hotels-img .show-button {
+    width: 10vw;
+    height: 2.5vw;
+    font-size: 0.5vw;
+    top: 75%;
+  }
+}
+
+
