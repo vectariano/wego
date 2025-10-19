@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../static/img/logo.png";
 import plane from "../static/img/airplane.png";
+import { Link } from "react-router-dom";
 import sleeping from "../static/img/sleeping.png";
 
 function LandingHeader() {
@@ -25,11 +26,11 @@ function LandingHeader() {
         </button>
       </nav>
 
-      <img src={logo} className="main-logo" alt="WeGo" />
+      <Link to="/" className="home"><img src={logo} className="main-logo" alt="logo" /></Link>
 
       <div className="landing-auth">
-        <button className="loginik">Login</button>
-        <button className="signupik">Sign up</button>
+        <button className="login">Login</button>
+        <button className="signup">Sign up</button>
       </div>
     </header>
   );

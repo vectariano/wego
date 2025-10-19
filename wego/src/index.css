@@ -120,7 +120,7 @@ code {
 
 .greet-string {
   position: absolute;
-  top: 55%; 
+  top: 50%; 
   left: 50%;
   transform: translate(-50%, -55%); 
   color: white;
@@ -151,13 +151,15 @@ code {
 .search {
   background-color: white;
   width: 70%;
-  margin: 0 auto;
-  padding: 1.5rem 2rem; 
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 72%;
+  left: 50%;
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative; 
   z-index: 2;
-  margin-top: 4rem;
+  /* margin-top: 4rem; */ 
 }
 
 .search-flex {
@@ -272,7 +274,7 @@ input {
   display: flex;
   justify-content: space-between;
   justify-self: center;
-  margin-top: 15vh;
+  /* margin-top: 10vh; */
   flex-wrap: wrap;
 }
 
@@ -448,10 +450,10 @@ input {
 
 .landing-nav {
   display: flex;
-  padding-left: 6em; 
-  justify-content: flex-start;
-  gap: 2em;
-  cursor: pointer;
+    padding-left: 6em;
+    justify-content: flex-start;
+    gap: 2em;
+    cursor: pointer;
 }
 
 .plane-img,
@@ -464,22 +466,24 @@ input {
 .stays-buttonik {
   display: flex;
   background: none;
+  box-sizing: border-box;
   border: none;
   gap: 0.5em;
+  font-size: 1em;
+  line-height: 1.2;
   text-decoration: none;
   color: rgb(255, 255, 255); 
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   align-items: center;
   cursor: pointer;
-   border-bottom: 3px solid transparent;
+  border-bottom: 3px solid transparent;
 }
 
 
 .flights-buttonik.active,
-.stays-buttonik.active {
-  color: hsl(167, 46%, 60%);
-  border-bottom-color: hsl(167, 46%, 60%);
+.stays-buttonik.active { 
+  border-color: hsl(167, 46%, 60%);
 }
 
 .landing-auth {
@@ -497,7 +501,7 @@ input {
   font-weight: 600;
 }
 
-.signupik{
+.signupik {
   background: hsl(167, 46%, 60%); 
   height: 3em;
   width: 7em;
