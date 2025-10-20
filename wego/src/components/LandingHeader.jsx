@@ -28,8 +28,8 @@ function LandingHeader() {
 
       <Link to="/" className="home"><img src={logo} className="main-logo" alt="logo" /></Link>
 
-      <div className="landing-auth">
-        <button className="login">Login</button>
+      <div className="user-corner">
+        <Link to="/login" className="login">Login</Link>
         <button className="signup">Sign up</button>
       </div>
     </header>

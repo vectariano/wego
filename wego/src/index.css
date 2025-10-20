@@ -82,11 +82,15 @@ code {
 
 .login {
   background: none;
+  font-size: 1.5vh;
   color: white;
+  text-decoration: none;
   border: none;
   font-family: "Montserrat",
     sans-serif;
   font-weight: 600;
+  align-self: center;
+  cursor: pointer;
 }
 
 .signup {
@@ -99,6 +103,7 @@ code {
   font-family: "Montserrat",
       sans-serif;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .greetings {
@@ -644,6 +649,83 @@ input {
 
 .book-button:hover {
   background-color: #52a994;
+}
+
+.login-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10em;
+  min-height: 100vh;
+}
+
+.login-section-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.email-div, 
+.password-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.email,
+.password {
+  width: 20vw;
+}
+
+.email-label {
+  width: 4em;
+}
+
+.password-label {
+  width: 6em;
+}
+
+.dark-logo {
+  height: 11vh;
+  width: 9vw;
+  align-self: center;
+}
+
+.images-section {
+  display: flex;
+}
+
+.login-img {
+  height: 34vw;
+  align-self: center;
+  border-radius: 30px;
+}
+
+.login-text-div h1 {
+  font-size: 3rem;
+  font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+.login-text-div h2 {
+  font-size: 1rem;
+  color: gray;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.login-access-button {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+  height: 4vh;
+  border-radius: 10px;
+  background-color: #69c7b3;
 }
 
 @media (max-width: 768px) {

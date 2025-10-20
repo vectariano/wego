@@ -23,7 +23,7 @@ function Header() {
             <Link to="/" className="home"><img src={logo} className="main-logo" alt="logo" /></Link>
 
             <div className="user-corner">
-                <button className="login">Login</button>
+                <Link to="/login" className="login">Login</Link>
                 <button className="signup">Sign up</button>
             </div>
         </header>
