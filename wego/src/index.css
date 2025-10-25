@@ -94,15 +94,20 @@ code {
 }
 
 .signup {
+  display: flex;
   background: white;
+  font-size: 1.5vh;
   height: 3em;
   width: 7em;
+  text-decoration: none;
   color: black;
   border: none;
   border-radius: 10px;
   font-family: "Montserrat",
       sans-serif;
   font-weight: 600;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
@@ -120,7 +125,6 @@ code {
   height: 70vh;
   border-radius: 30px;
   object-fit: cover;
-  
 }
 
 .greet-string {
@@ -451,7 +455,26 @@ input {
   display: flex;
 }
 
+.greet-string-flights {
+  position: absolute;
+  top: 50%;
+  left: 32%;
+  transform: translate(-50%, -55%);
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 0.5rem;
+  z-index: 2;
+  padding-top: 3rem;
+  width: 40em;
+}
 
+.greet-string-flights .text1,
+.greet-string-flights .text3 {
+  text-align: left;
+}
 
 .landing-nav {
   display: flex;
@@ -701,7 +724,8 @@ input {
 }
 
 .login-img {
-  height: 34vw;
+  height: 40em;
+  width: 30em;
   align-self: center;
   border-radius: 30px;
 }
@@ -723,6 +747,112 @@ input {
   border: none;
   font-family: "Montserrat", sans-serif;
     font-weight: 500;
+  height: 4vh;
+  border-radius: 10px;
+  background-color: #69c7b3;
+}
+
+.signup-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10em;
+  min-height: 100vh;
+}
+
+.signup-section-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.signup-form {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.name-div-flex {
+  display: flex;
+  gap: 1.5em;
+}
+
+.fn, .ln {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-phone-div-flex {
+  display: flex;
+  gap: 1.5em;
+}
+
+.em,
+.ph {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-phone-div-flex input, .name-div-flex input {
+  width: 17em;
+}
+
+.signup-email-label {
+  width: 4em;
+}
+
+.phone-label {
+  width: 9em;
+}
+
+.first-name-label,
+.last-name-label {
+  width: 7em;
+}
+
+.signup-img {
+  height: 40em;
+  width: 30em;
+  align-self: center;
+  border-radius: 30px;
+}
+
+.signup-text-div h1 {
+  font-size: 3rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.signup-text-div h2 {
+  font-size: 1rem;
+  color: gray;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.signup-password-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em
+}
+
+.pass, .conf-pass {
+  display: flex;
+  flex-direction: column;
+}
+
+.confirm-password-label {
+  width: 10em;
+}
+
+.signup-password-div input {
+  width: auto
+}
+
+.signup-access-button {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
   height: 4vh;
   border-radius: 10px;
   background-color: #69c7b3;

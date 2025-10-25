@@ -30,7 +30,7 @@ function LandingHeader() {
 
       <div className="user-corner">
         <Link to="/login" className="login">Login</Link>
-        <button className="signup">Sign up</button>
+        <Link to="/signup" className="signup">Sign up</Link>
       </div>
     </header>
   );
