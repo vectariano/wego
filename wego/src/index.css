@@ -516,14 +516,14 @@ input {
 
 .landing-auth {
   display: flex;
-  padding-right: 6em; /* как у вас */
+  padding-right: 6em; 
   justify-content: flex-end;
   gap: 2em;
 }
 
 .loginik{
   background: none;
-  color: white; /* белый текст */
+  color: white; 
   border: none;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -1311,5 +1311,399 @@ input {
     width: 7em;
     height: 2.2em;
     font-size: 0.8em;
+  }
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 6em;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.left-nav {
+  display: flex;
+  gap: 2em;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #333;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  padding: 0.5em 0;
+  position: relative;
+}
+
+.nav-link.active {
+  color: #69c7b3;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #69c7b3;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.logo-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+.logo-accent {
+  color: #69c7b3;
+}
+
+.right-user {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.favourites-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #333;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.favourites-link:hover {
+  color: #69c7b3;
+}
+
+.heart-icon {
+  font-size: 1.2em;
+}
+
+.separator {
+  color: #ccc;
+  font-size: 1.2em;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #333;
+}
+
+
+@media (max-width: 768px) {
+  .listing-header {
+    padding: 0.8em 2em;
+  }
+
+  .left-nav {
+    gap: 1em;
+  }
+
+  .nav-link {
+    font-size: 0.9em;
+    gap: 0.3em;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+
+  .right-user {
+    gap: 1em;
+  }
+
+  .favourites-link {
+    font-size: 0.85em;
+  }
+
+  .avatar {
+    width: 2em;
+    height: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .listing-header {
+    padding: 0.6em 1em;
+  }
+
+  .left-nav {
+    gap: 0.8em;
+  }
+
+  .nav-link {
+    font-size: 0.85em;
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .right-user {
+    gap: 0.8em;
+  }
+
+  .favourites-link {
+    font-size: 0.8em;
+  }
+
+  .avatar {
+    width: 1.8em;
+    height: 1.8em;
+  }
+}
+
+.hotel-search-bar {
+  padding: 2rem 6rem;
+  background-color: #f8f9fa;
+}
+
+.search-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 180px;
+  position: relative;
+}
+
+.input-with-icon {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 40px; 
+}
+
+.input-icon {
+  width: 2em;
+  height: 2em;
+  object-fit: contain;
+  position: absolute;
+  left: 0.3rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.input-bed {
+  width: 2.5em;
+  height: 2.5em;
+  object-fit: contain;
+  position: absolute;
+  left: 0.3rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+.destination-input {
+  width: 100%;
+  padding: 0 0.5rem 0 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  outline: none;
+  background: white;
+  height: 100%; 
+  line-height: 1.5;
+}
+
+.check-in-input,
+.check-out-input {
+  width: 100%;
+  padding: 0 0.5rem 0 2.0rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  outline: none;
+  background: white;
+  height: 100%; 
+  line-height: 1.5;
+}
+
+.calendar-icon {
+  width: 2.5em;
+  height: 2.5em;
+  object-fit: contain;
+  position: absolute;
+  right: 0.7rem;
+  z-index: 2;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+
+.guests-select {
+  width: 100%;
+  padding: 0 2.5rem 0 2.5rem; 
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  background: white;
+  position: relative;
+  z-index: 1;
+  height: 100%; 
+  line-height: 1.5; 
+}
+
+.dropdown-arrow {
+  width: 2.5em;
+  height: 2.5em;
+  object-fit: contain;
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+.hotel-search-button {
+  background-color: #69c7b3;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 40px; 
+  padding: 0;
+}
+
+.hotel-search-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .hotel-search-bar {
+    padding: 1rem;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-field {
+    min-width: auto;
+  }
+
+  .hotel-search-button {
+    width: 100%;
+    height: 40px;
+  }
+
+  .input-icon,
+  .calendar-icon,
+  .dropdown-arrow {
+    width: 2em;
+    height: 2em;
+  }
+
+  .destination-input,
+  .check-in-input,
+  .check-out-input,
+  .guests-select {
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotel-search-bar {
+    padding: 0.5rem;
+  }
+
+  .search-container {
+    padding: 0.5rem;
+  }
+
+  .search-field {
+    gap: 0.3rem;
+  }
+
+  .hotel-search-button {
+    height: 40px;
+  }
+
+  .input-icon,
+  .calendar-icon,
+  .dropdown-arrow {
+    width: 1.2em;
+    height: 1.2em;
+  }
+
+  .destination-input,
+  .check-in-input,
+  .check-out-input,
+  .guests-select {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 0.85em;
   }
 }
