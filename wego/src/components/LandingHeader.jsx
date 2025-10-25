@@ -8,7 +8,6 @@ function LandingHeader() {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("flights");
 
-  // При первой загрузке — установить вкладку в зависимости от URL
   useEffect(() => {
     if (location.pathname === "/stays") {
       setActiveTab("stays");
