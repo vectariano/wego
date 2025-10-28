@@ -858,6 +858,59 @@ input {
   background-color: #69c7b3;
 }
 
+.flex-hotels-col {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3em;
+}
+
+.hotel-info-flex {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.hotel-card-flex {
+  border: 2px solid #69c7b3;
+  border-radius: 20px;
+  height: 20vh;
+  width: 70vw;
+  display: flex;
+  gap: 2em;
+}
+
+.card-head {
+  padding-top: 1em;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.hotel-price {
+  padding-right: 1em;
+}
+
+.card-head h1 {
+  font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+.hotel-info-flex h2 {
+  font-size: 2vh;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+.hotel-image {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  object-fit: cover;
+}
+
 @media (max-width: 768px) {
   .bg-img {
     height: 50vh; 
@@ -976,6 +1029,8 @@ input {
     font-size: 0.9em;
   }
 }
+
+
 
 @media (max-width: 480px) {
   .bg-img {
