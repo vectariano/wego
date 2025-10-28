@@ -1,14 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 
 function HotelSearch() {
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-
-    navigate("/hotels");
-  };
-
   return (
     <section className="hotel-search">
       <div className="hotel-search-header">
@@ -33,7 +26,7 @@ function HotelSearch() {
       </div>
 
       <div className="hotel-bottom-buttons-flex">
-        <button className="search-button" onClick={handleSearch}>
+        <button className="search-button">
           Search
         </button>
       </div>

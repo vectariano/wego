@@ -21,6 +21,7 @@ function Header() {
             </nav>
 
             <Link to="/" className="home"><img src={logo} className="main-logo" alt="logo" /></Link>
+            
 
             <div className="user-corner">
                 <Link to="/login" className="login">Login</Link>

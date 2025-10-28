@@ -1,8 +1,16 @@
 import React from "react";
 import airport from "../static/img/yousef-alfuhigi-bMIlyKZHKMY-unsplash.jpg";
 import hotel from "../static/img/rakabtw_-M3YuHIpgmSY-unsplash.jpg";
+import { useNavigate } from "react-router-dom";
 
 function FlightsHotels() {
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+
+        navigate("/hotels");
+    };
+
     return (
         <div className="flights-hotels-flex">
             <div className="airport-img">
@@ -16,7 +24,7 @@ function FlightsHotels() {
                 <img src={hotel} className="airport-hotel-img" alt="hotel" />
                 <h2 className="airport-hotel-text">Hotels</h2>
                 <h3 className="search-airport-hotel-text">Search hotels & Places Hire to our most popular <br />destinations</h3>
-                <button className="show-button">Show Hotels</button>
+                <button className="show-button" onClick={handleSearch}>Show Hotels</button>
             </div>
         </div>
     );
