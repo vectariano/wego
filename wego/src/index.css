@@ -859,8 +859,8 @@ input {
 }
 
 .flex-hotels-col {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 2em;
+  padding-bottom: 4em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -871,6 +871,7 @@ input {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  width: 100%;
 }
 
 .hotel-card-flex {
@@ -884,10 +885,39 @@ input {
 
 .card-head {
   padding-top: 1em;
+  
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
+}
+
+.hotel-rating {
+  display: flex;
+  padding-right: 1em;
+  gap: 1em;
+  align-self: flex-end;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating {
+  font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+  font-size: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #69c7b3;
+  border-radius: 50px;
+  height: 4vh;
+  width: 2vw;
+}
+
+.reviews {
+  font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 1.5vh;
 }
  
 .hotel-price {
@@ -899,16 +929,66 @@ input {
     font-weight: 300;
 }
 
-.hotel-info-flex h2 {
-  font-size: 2vh;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-}
-
 .hotel-image {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   object-fit: cover;
+}
+
+.card-mid {
+  display: flex;
+  align-items: start;
+  width: 70%;
+}
+
+.hotel-description {
+  font-size: 2vh;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+.card-bottom {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.book-item {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 1em;
+}
+
+.hotel-price {
+  font-size: 2.5vh;
+  font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+.booking-button {
+  border: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    height: 4vh;
+    width: 5vw;
+    border-radius: 10px;
+    background-color: #69c7b3;
+}
+
+.amenities-list {
+  display: grid;
+  column-gap: 1em;
+  padding: 0;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.hotel-amenities {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.5vh;
+  list-style: none;
 }
 
 @media (max-width: 768px) {
