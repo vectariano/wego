@@ -11,13 +11,17 @@ function FlightsHotels() {
         navigate("/hotels");
     };
 
+    const handleSearch2 = () => {
+        navigate("/flights");
+    };
+
     return (
         <div className="flights-hotels-flex">
             <div className="airport-img">
                 <img src={airport} className="airport-hotel-img" alt="airport" />
                 <h2 className="airport-hotel-text">Flights</h2>
                 <h3 className="search-airport-hotel-text">Search Flights & Places Hire to our most popular <br/>destinations</h3>
-                <button className="show-button">Show Flights</button>
+                <button className="show-button" onClick={handleSearch2}>Show Flights</button>
             </div>
 
             <div className="hotels-img">
