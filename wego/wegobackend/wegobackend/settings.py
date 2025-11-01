@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework",
     'corsheaders',
+    'accounts',
     'hotels',
     "django.contrib.admin",
     "django.contrib.auth",
@@ -55,7 +56,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # твой React-фронтенд
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "wegobackend.urls"
 

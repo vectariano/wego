@@ -29,6 +29,7 @@ router.register(r'hotels', HotelViewSet, basename="hotel")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="home"),
+    path("api/auth/", include("accounts.urls")),
     path("api/", include(router.urls)),
 
     re_path(r'^manifest\.json$', serve, {
