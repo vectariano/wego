@@ -10,7 +10,7 @@ function ListingHeader() {
   useEffect(() => {
     if (location.pathname === "/flights") {
       setActiveTab("flights");
-    } else if (location.pathname === "/stays") {
+    } else if (location.pathname === "/hotels") {
       setActiveTab("stays");
     }
   }, [location.pathname]);
