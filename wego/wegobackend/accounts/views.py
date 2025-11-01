@@ -29,6 +29,7 @@ def signup(request):
     )
     return JsonResponse({'message': 'User created'}, status=201)
 
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def login_view(request):
@@ -43,9 +44,13 @@ def login_view(request):
     else:
         return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
+
+@csrf_exempt
+@require_http_methods(["POST"])
 def logout_view(request):
     logout(request)
     return JsonResponse({'message': 'Logged out'})
+
 
 def me(request):
     if request.user.is_authenticated:

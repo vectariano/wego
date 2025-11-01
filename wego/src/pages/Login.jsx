@@ -1,3 +1,4 @@
+// Login.js
 import React from "react";
 import logo from "../static/img/dark-logo.png";
 import img from "../static/img/rakabtw_-M3YuHIpgmSY-unsplash.jpg";
@@ -5,7 +6,6 @@ import img from "../static/img/rakabtw_-M3YuHIpgmSY-unsplash.jpg";
 function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
-
         const email = document.querySelector('.email').value;
         const password = document.querySelector('.password').value;
 

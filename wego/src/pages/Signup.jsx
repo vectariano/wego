@@ -1,3 +1,4 @@
+// SignUp.js
 import React from "react";
 import logo from "../static/img/dark-logo.png";
 import img from "../static/img/clay-banks-O5hfuVWgsS8-unsplash.jpg";
@@ -5,7 +6,6 @@ import img from "../static/img/clay-banks-O5hfuVWgsS8-unsplash.jpg";
 function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const firstName = document.querySelector('.first-name').value;
         const lastName = document.querySelector('.last-name').value;
         const email = document.querySelector('.signup-email').value;
@@ -31,7 +31,6 @@ function SignUp() {
             });
 
             const data = await response.json();
-
             if (response.ok) {
                 alert('Account created successfully!');
                 window.location.href = '/login';
