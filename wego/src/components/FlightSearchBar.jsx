@@ -20,7 +20,6 @@ function FlightSearchBar() {
   return (
     <section className="flight-search-bar">
       <div className="flight-search-container">
-        {/* From - To */}
         <div className="flight-search-field">
           <div className="flight-input-with-icon">
             <img src={planeIcon} className="flight-icon" alt="From - To" />
