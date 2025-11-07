@@ -10,7 +10,7 @@ function ListingHeader() {
   useEffect(() => {
     if (location.pathname === "/flights") {
       setActiveTab("flights");
-    } else if (location.pathname === "/stays") {
+    } else if (location.pathname === "/hotels") {
       setActiveTab("stays");
     }
   }, [location.pathname]);
@@ -47,10 +47,8 @@ function ListingHeader() {
         We<span className="logo-accent">G</span>o
       </div>
 
-      {/* Правая часть */}
       <div className="right-user">
         <Link to="/favourites" className="favourites-link">
-          <span className="heart-icon">❤️</span>
           Favourites
         </Link>
         <span className="separator">|</span>
