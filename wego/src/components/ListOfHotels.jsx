@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function ListOfHotels() {
     const [hotels, setHotels] = useState([]);
@@ -47,7 +48,7 @@ function ListOfHotels() {
                             </div>
                             <div className="book-item">
                                 <h1 className="hotel-price">{hotel.total_rate.lowest}</h1>
-                                <button className="booking-button">Book now</button>
+                               <Link to={`/hotel/${i}`} className="bbooking-button"><span>Book now</span></Link>
                             </div>
                         </div>
                         
