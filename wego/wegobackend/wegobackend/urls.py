@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 from hotels.views import HotelViewSet
+from flights.views import FlightsViewSet
 from rest_framework.routers import DefaultRouter
 from django.views.static import serve
 from django.urls import re_path
@@ -25,10 +26,11 @@ from django.conf import settings
 
 router = DefaultRouter()
 router.register(r'hotels', HotelViewSet, basename="hotel")
+router.register(r'flights', FlightsViewSet, basename="flight")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #path("", views.index, name="home"),
+    path("", views.index, name="home"),
     path("api/auth/", include("accounts.urls")),
     path("api/", include(router.urls)),
 

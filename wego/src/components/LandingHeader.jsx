@@ -52,10 +52,6 @@ function LandingHeader() {
         <img src={logo} className="main-logo" alt="logo" />
       </Link>
 
-      <div className="user-corner">
-        <Link to="/login" className="login">Login</Link>
-        <Link to="/signup" className="signup">Sign up</Link>
-      </div>
     </header>
   );
 }

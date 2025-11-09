@@ -13,7 +13,7 @@ function ListOfFlights() {
         const response = await fetch("/api/flights/");
         if (!response.ok) throw new Error("Failed to fetch flights");
         const data = await response.json();
-        setFlights(Array.isArray(data) ? data : []);
+        setFlights(data || []);
       } catch (err) {
         console.error("Error fetching flights:", err);
         setError(err.message);
@@ -46,37 +46,43 @@ function ListOfFlights() {
       {flights.map((flight) => (
         <div key={flight.id} className="flight-card-flex">
           <div className="flight-info-flex">
-            <div className="card-head">
+            <div className="card-head-flights">
               <div className="name-description">
-                <h2 className="flight-route">
-                  {flight.departure.city} ({flight.departure.airport}) → {flight.arrival.city} ({flight.arrival.airport})
-                </h2>
+                <h1 className="flight-route">
+
+                  <img src={flight.flights[0].airline_logo} className="airlogo" alt="airlogo" />
+                  {flight.flights[0].departure_airport.name} → {flight.flights[0].arrival_airport.name} 
+                </h1>
                 <div className="card-mid">
-                  <p className="flight-airline">{flight.airline.name}</p>
+                  <p className="flight-airline">Airline:  {flight.flights[0].airline}</p>
                 </div>
               </div>
               <div className="flight-rating">
-                <span className="price">{flight.price.total}</span>
+                <h2 className="price">{flight.price}</h2>
               </div>
             </div>
 
-            <div className="card-bottom">
-              <div className="flight-details-grid">
+            <div className="card-bottom-flights">
+              <div className="flight-details-flex">
                 <div className="flight-time">
-                  <span className="time">{flight.departure.time}</span>
-                  <span className="date">{flight.departure.date}</span>
+                  <p className="time">{flight.flights[0].departure_airport.time} ({flight.flights[0].departure_airport.id})</p>
                 </div>
                 <div className="flight-duration">
-                  <span className="duration">{flight.duration}</span>
-                  <span className="stops">{flight.stops === 0 ? "Nonstop" : `${flight.stops} stop(s)`}</span>
+                  <p className="duration">{Math.floor(flight.flights[0].duration / 60)}h {Math.floor(flight.flights[0].duration % 60)}m</p>
+                  {/* <span className="stops">{flight.stops === 0 ? "Nonstop" : `${flight.stops} stop(s)`}</span> */}
                 </div>
                 <div className="flight-time arrival">
-                  <span className="time">{flight.arrival.time}</span>
-                  <span className="date">{flight.arrival.date}</span>
+                  <p className="time">{flight.flights[0].arrival_airport.time} ({flight.flights[0].arrival_airport.id})</p>
                 </div>
+
+                <div className="flight-type">
+                  <p className="type">{flight.type}</p>
+                </div>
+
+                
               </div>
 
-              <div className="book-item">
+              <div className="book-flight-item">
                 <button className="booking-button" onClick={() => handleBook(flight.id)}>
                   Select Flight
                 </button>

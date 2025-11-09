@@ -80,7 +80,7 @@ code {
   gap: 2em;
 }
 
-.login {
+.login, .account {
   background: none;
   font-size: 1.5vh;
   color: white;
@@ -93,7 +93,7 @@ code {
   cursor: pointer;
 }
 
-.signup {
+.signup, .logout-button {
   display: flex;
   background: white;
   font-size: 1.5vh;
@@ -441,10 +441,10 @@ input {
 
 .landing-header {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   position: absolute;
-  width: 100%;
+  width: 54.75%;
   padding-top: 2em;
   z-index: 2;
 }
@@ -858,7 +858,7 @@ input {
   background-color: hsl(167, 46%, 60%);
 }
 
-.flex-hotels-col {
+.flex-hotels-col, .flex-flights-col {
   padding-top: 2em;
   padding-bottom: 4em;
   display: flex;
@@ -867,14 +867,14 @@ input {
   gap: 3em;
 }
 
-.hotel-info-flex {
+.hotel-info-flex, .flight-info-flex {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
 }
 
-.hotel-card-flex {
+.hotel-card-flex, .flight-card-flex {
   border: 2px solid #69c7b3;
   border-radius: 20px;
   height: 20vh;
@@ -883,16 +883,45 @@ input {
   gap: 2em;
 }
 
+.airlogo {
+  height: 5vh;
+  padding-right: 0.5em;
+}
+
 .card-head {
   padding-top: 1em;
-  
   display: flex;
   width: 100%;
   align-items: start;
   justify-content: space-between;
 }
 
-.hotel-rating {
+.card-head-flights {
+  padding-top: 1em;
+  padding-left: 2em;
+    display: flex;
+    width: 100%;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.hotel-name {
+  font-size: 2.0rem;
+  margin: 0 0 8px;
+  color: #222;
+  font-weight: 600;
+}
+
+.flight-route {
+  font-size: 2.0rem;
+  margin: 0 0 8px;
+  color: #222;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.hotel-rating, .flight-rating {
   display: flex;
   padding-right: 1em;
   gap: 1em;
@@ -914,6 +943,20 @@ input {
   width: 2vw;
 }
 
+.price {
+  font-family: "Montserrat", sans-serif;
+  margin-right: 1.5em;
+    font-weight: 300;
+    font-size: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #69c7b3;
+    border-radius: 50px;
+    height: 6vh;
+    width: 3vw;
+}
+
 .reviews {
   font-family: "Montserrat", sans-serif;
     font-weight: 300;
@@ -924,7 +967,7 @@ input {
   padding-right: 1em;
 }
 
-.card-head h1 {
+.card-head h1, .card-head-flights h1 {
   font-family: "Montserrat", sans-serif;
     font-weight: 300;
 }
@@ -941,7 +984,7 @@ input {
   width: 70%;
 }
 
-.hotel-description {
+.hotel-description, .flight-airline {
   font-size: 2vh;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
@@ -954,11 +997,31 @@ input {
   align-items: center;
 }
 
+.card-bottom-flights {
+  padding-left: 2em;
+  display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.card-bottom-flights p {
+  font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
 .book-item {
   display: flex;
   align-items: center;
   margin-left: auto;
   padding-right: 1em;
+}
+
+.book-flight-item {
+  display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 3em;
 }
 
 .hotel-price {
@@ -989,6 +1052,11 @@ input {
   font-weight: 300;
   font-size: 1.5vh;
   list-style: none;
+}
+
+.flight-details-flex {
+  display: flex;
+  gap: 1em;
 }
 
 @media (max-width: 768px) {
@@ -2026,12 +2094,7 @@ input {
   flex: 1;
 }
 
-.hotel-name {
-  font-size: 2.0rem;
-  margin: 0 0 8px;
-  color: #222;
-  font-weight: 600;
-}
+
 
 .hotel-meta {
   display: flex;
