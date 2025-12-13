@@ -62,9 +62,4 @@ GET https://serpapi.com/search?engine=google_maps
 * Безопасность: Данные пользователей должны быть защищены.
 
 ### Таблицы <br/>
-
-lat DECIMAL(10, 8)
-lng DECIMAL(11, 8)
-raw_data JSONB
-last_updated TIMESTAMPTZ DEFAULT NOW()
-```
+<img src="diagrams/postgres - public.png" alt="db" height="500"/>
