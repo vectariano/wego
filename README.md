@@ -5,8 +5,7 @@
 
 ## 2. Ключевые функциональные модули:
   * **Модуль бронирования жилья**: Интеграция с API провайдеров бронирования для поиска, сравнения и перехода к резервированию.<br/>
-  * **Модуль "Гид по местам"**: База данных точек интереса (POI) с категоризацией (культура, гастрономия, природа и т.д.), описаниями, фотографиями и отзывами.<br/>  
-  * **Модуль метеоданных**: Интеграция с weather API для отображения актуального и прогнозируемого состояния погоды в выбранном локации на даты поездки.<br/>
+  * **Модуль бронирования билетов**: База данных билетов на самолеты.<br/>  
   * **Модуль карт и маршрутизации**: Интеграция картографического сервиса (например, Google Maps, Mapbox).<br/>
 
 ## 3. Целевая аудитория:
@@ -40,33 +39,21 @@
 <img src="diagrams/container-diagram.jpg?update=1" alt="container-diagram" height="500"/>
 
 ### Контракты API
-* Бронирование: 
+* Бронирование отелей: 
 ``` 
- GET https://whitelabel.travel.yandex-net.ru/hotels/suggest/
-   ? query=<string>
-   & [region_limit=<integer>]
-   & [hotel_limit=<integer>]
-   & [affiliate_clid=<string>]
+ GET https://serpapi.com/search?engine=google_hotels
+```
+
+* Бронирование авиабилетов:
+```
+GET https://serpapi.com/search?engine=google_flights
 ```
 
 * Maps/POI:
 ```
-GET https://search-maps.yandex.ru/v1/
-  ? apikey=<string>
-  & text=<string>
+GET https://serpapi.com/search?engine=google_maps
 ```
 
-* Weather:
-```
-GET "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41
-&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m" 
-```
-
-* Flights:
-```
-GET https://api.aviationstack.com/v1/flights
-    ? access_key = YOUR_ACCESS_KEY
-```
 
 ### Нефункциональные требования
 * Время отклика: Среднее время отклика API не должно превышать **500 мс**.
@@ -75,37 +62,7 @@ GET https://api.aviationstack.com/v1/flights
 * Безопасность: Данные пользователей должны быть защищены.
 
 ### Таблицы <br/>
-```
-users:
-id SERIAL PRIMARY KEY 
-email VARCHAR(255) UNIQUE NOT NULL 
-```
 
-```
-trips:
-id SERIAL PRIMARY KEY
-user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-title VARCHAR(255)
-destination VARCHAR(255)
-start_date DATE
-end_date DATE
-```
-
-```
-trip_places:
-id SERIAL PRIMARY KEY
-trip_id INTEGER REFERENCES trips(id) ON DELETE CASCADE
-place_id VARCHAR(255),
-visit_date DATE
-notes TEXT
-```
-
-```
-poi:
-id VARCHAR(255) PRIMARY KEY
-name VARCHAR(255)
-category VARCHAR(100)
-description TEXT
 lat DECIMAL(10, 8)
 lng DECIMAL(11, 8)
 raw_data JSONB
