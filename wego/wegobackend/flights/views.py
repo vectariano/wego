@@ -1,7 +1,4 @@
-from django.shortcuts import render
-
-# Create your views here.
-
+# flights/views.py
 import requests
 import os
 from rest_framework.viewsets import ViewSet
@@ -12,29 +9,44 @@ load_dotenv()
 
 class FlightsViewSet(ViewSet):
     def list(self, request):
-        url = "https://serpapi.com/search.json"  
+        # Убраны пробелы в URL!
+        url = "https://serpapi.com/search.json"
         params = {
             "engine": "google_flights",
             "departure_id": "PEK",
             "arrival_id": "AUS",
-            "outbound_date": "2025-11-16",
-            "return_date": "2025-11-20",
+            "outbound_date": "2025-12-27",
+            "return_date": "2025-12-28",
             "currency": "USD",
             "hl": "en",
             "api_key": os.getenv("SERP_API_KEY")
         }
 
-        try:
-            response = requests.get(url, params=params, timeout=10)
-            response.raise_for_status()
-            data = response.json()
-            flights =  data.get("other_flights")  or []
-            print(data)
-
-            return Response(flights)
-        except Exception as e:
-            error_msg = f" SerpAPI error: {e}"
+        # Проверка наличия API-ключа
+        if not params["api_key"]:
+            error_msg = "SERP_API_KEY is not set in environment"
             print(error_msg)
             return Response({"error": error_msg}, status=500)
 
+        try:
+            # Увеличен таймаут до 15 секунд
+            response = requests.get(url, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
+
+            # Возвращаем весь ответ, чтобы фронтенд мог использовать best_flights + other_flights
+            return Response(data)
+
+        except requests.exceptions.Timeout:
+            error_msg = "SerpAPI request timed out"
+            print(error_msg)
+            return Response({"error": error_msg}, status=504)
+        except requests.exceptions.RequestException as e:
+            error_msg = f"SerpAPI connection error: {e}"
+            print(error_msg)
+            return Response({"error": error_msg}, status=502)
+        except Exception as e:
+            error_msg = f"Unexpected error: {e}"
+            print(error_msg)
+            return Response({"error": error_msg}, status=500)
     
