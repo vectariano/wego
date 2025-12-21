@@ -1,98 +1,160 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// src/components/ListOfFlights.jsx
+import React, { useEffect, useState, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 function ListOfFlights() {
-  const [flights, setFlights] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+    const [flights, setFlights] = useState([]);
+    const [sortOption, setSortOption] = useState("price-low");
+    const location = useLocation();
 
-  useEffect(() => {
     const fetchFlights = async () => {
-      try {
-        const response = await fetch("/api/flights/");
-        if (!response.ok) throw new Error("Failed to fetch flights");
-        const data = await response.json();
-        setFlights(data || []);
-      } catch (err) {
-        console.error("Error fetching flights:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+        try {
+            const response = await fetch("/api/flights/");
+            const data = await response.json();
+
+            const allFlights = [...(data.best_flights || []), ...(data.other_flights || [])];
+
+            const flightsWithId = allFlights.map(flight => ({
+                ...flight,
+                id: flight.departure_token 
+            }));
+
+            setFlights(flightsWithId);
+            localStorage.setItem("cachedFlights", JSON.stringify(flightsWithId));
+        } catch (error) {
+            console.error("Failed to fetch flights:", error);
+        }
     };
 
-    fetchFlights();
-  }, []);
+    useEffect(() => {
+        fetchFlights();
+    }, [location.search]); 
 
-  const handleBook = (flightId) => {
-    navigate(`/flight/${flightId}`);
-  };
+    const sortedFlights = useMemo(() => {
+        if (!flights.length) return [];
+        const sorted = [...flights];
 
-  if (loading) {
-    return <div className="flights-loading">Loading flights...</div>;
-  }
+        const getPrice = (flight) => flight.price || 0;
+        const getDuration = (flight) => flight.total_duration || 0;
 
-  if (error) {
-    return <div className="flights-error">Error loading flights: {error}</div>;
-  }
+        switch (sortOption) {
+            case "price-low":
+                return sorted.sort((a, b) => getPrice(a) - getPrice(b));
+            case "price-high":
+                return sorted.sort((a, b) => getPrice(b) - getPrice(a));
+            case "duration-low":
+                return sorted.sort((a, b) => getDuration(a) - getDuration(b));
+            case "duration-high":
+                return sorted.sort((a, b) => getDuration(b) - getDuration(a));
+            default:
+                return sorted;
+        }
+    }, [flights, sortOption]);
 
-  if (flights.length === 0) {
-    return <div className="flights-empty">No flights found.</div>;
-  }
-
-  return (
-    <div className="flex-flights-col">
-      {flights.map((flight) => (
-        <div key={flight.id} className="flight-card-flex">
-          <div className="flight-info-flex">
-            <div className="card-head-flights">
-              <div className="name-description">
-                <h1 className="flight-route">
-
-                  <img src={flight.flights[0].airline_logo} className="airlogo" alt="airlogo" />
-                  {flight.flights[0].departure_airport.name} → {flight.flights[0].arrival_airport.name} 
-                </h1>
-                <div className="card-mid">
-                  <p className="flight-airline">Airline:  {flight.flights[0].airline}</p>
-                </div>
-              </div>
-              <div className="flight-rating">
-                <h2 className="price">{flight.price}</h2>
-              </div>
+    return (
+        <div className="flex-flights-col">
+            <div style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                margin: "1rem 0",
+                padding: "0 1rem"
+            }}>
+                <label style={{ marginRight: "0.5rem", fontWeight: "bold" }}>Sort by:</label>
+                <select
+                    value={sortOption}
+                    onChange={(e) => setSortOption(e.target.value)}
+                    style={{
+                        padding: "0.4rem",
+                        borderRadius: "4px",
+                        border: "1px solid #ccc",
+                        fontSize: "0.95rem",
+                        minWidth: "180px"
+                    }}
+                >
+                    <option value="price-low">Price: low to high</option>
+                    <option value="price-high">Price: high to low</option>
+                    <option value="duration-low">Duration: short to long</option>
+                    <option value="duration-high">Duration: long to short</option>
+                </select>
             </div>
 
-            <div className="card-bottom-flights">
-              <div className="flight-details-flex">
-                <div className="flight-time">
-                  <p className="time">{flight.flights[0].departure_airport.time} ({flight.flights[0].departure_airport.id})</p>
-                </div>
-                <div className="flight-duration">
-                  <p className="duration">{Math.floor(flight.flights[0].duration / 60)}h {Math.floor(flight.flights[0].duration % 60)}m</p>
-                  {/* <span className="stops">{flight.stops === 0 ? "Nonstop" : `${flight.stops} stop(s)`}</span> */}
-                </div>
-                <div className="flight-time arrival">
-                  <p className="time">{flight.flights[0].arrival_airport.time} ({flight.flights[0].arrival_airport.id})</p>
-                </div>
+            {sortedFlights.length === 0 ? (
+                <p style={{ textAlign: "center", padding: "2rem" }}>No flights available.</p>
+            ) : (
+                sortedFlights.map((flight) => {
+                    const flightId = flight.id;
+                    if (!flightId) return null;
 
-                <div className="flight-type">
-                  <p className="type">{flight.type}</p>
-                </div>
+                    const firstLeg = flight.flights?.[0];
+                    if (!firstLeg) return null;
 
-                
-              </div>
+                    const dep = firstLeg.departure_airport;
+                    const arr = firstLeg.arrival_airport;
+                    const price = flight.price ? `$${flight.price.toLocaleString()}` : "—";
+                    const durationMin = flight.total_duration || 0;
+                    const hours = Math.floor(durationMin / 60);
+                    const minutes = durationMin % 60;
+                    const durationStr = `${hours}h ${minutes}m`;
 
-              <div className="book-flight-item">
-                <button className="booking-button" onClick={() => handleBook(flight.id)}>
-                  Select Flight
-                </button>
-              </div>
-            </div>
-          </div>
+                    return (
+                        <div key={flightId} className="flight-card-flex">
+                            <div className="flight-info-flex">
+                                <div className="card-head-flights">
+                                    <div className="name-description">
+                                        <h1 className="flight-route">
+                                            {firstLeg.airline_logo && (
+                                                <img
+                                                    src={firstLeg.airline_logo.trim()}
+                                                    className="airlogo"
+                                                    alt={firstLeg.airline}
+                                                    onError={(e) => {
+                                                        e.target.src = "https://via.placeholder.com/30x30?text=✈️";
+                                                    }}
+                                                />
+                                            )}
+                                            {dep?.name || "—"} ({dep?.id}) → {arr?.name || "—"} ({arr?.id})
+                                        </h1>
+                                        <div className="card-mid">
+                                            <p className="flight-airline">
+                                                {firstLeg.airline} • {firstLeg.flight_number || "—"} • {firstLeg.travel_class || "Economy"}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flight-rating">
+                                        <h2 className="price">{price}</h2>
+                                    </div>
+                                </div>
+
+                                <div className="card-bottom-flights">
+                                    <div className="flight-details-flex">
+                                        <div className="flight-time">
+                                            <p className="time">{dep?.time?.split(" ")[1] || "—"} ({dep?.id})</p>
+                                        </div>
+                                        <div className="flight-duration">
+                                            <p className="duration">{durationStr}</p>
+                                            {firstLeg.overnight && <span className="overnight-badge">Overnight</span>}
+                                        </div>
+                                        <div className="flight-time arrival">
+                                            <p className="time">{arr?.time?.split(" ")[1] || "—"} ({arr?.id})</p>
+                                        </div>
+                                        <div className="flight-type">
+                                            <p className="type">{flight.type || "Round trip"}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="book-flight-item">
+                                        <Link to={`/flight/${encodeURIComponent(flightId)}`} className="booking-button">
+                                            <span>Select Flight</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })
+            )}
         </div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default ListOfFlights;
