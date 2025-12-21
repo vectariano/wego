@@ -9,6 +9,7 @@ import FlightsPage from './pages/FlightsPage.jsx';
 import HotelListing from './pages/HotelListing.jsx';
 import FlightsListing from './pages/FlightsListing.jsx';
 import Hotelinfo from './pages/Hotelinfo.jsx';
+import FlightInfo from './pages/FlightInfo.jsx';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/hotels" element={<HotelListing />} />
         <Route path="/flights" element={<FlightsListing />} />
         <Route path="/hotel/:id" element={<Hotelinfo />} />
+        <Route path="/flight/:id" element={<FlightInfo />} />
       </Routes>
     </Router>
   );
