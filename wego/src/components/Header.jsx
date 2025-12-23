@@ -32,14 +32,14 @@ function Header() {
     return (
         <header className="header-flex">
             <nav className="left-flex-navigation">
-                <Link to="/flight" className="flights-button">
+                <div className="flights-button">
                     <img src={plane} className="plane-img" alt="plane" />
                     Find Flights
-                </Link>
-                <Link to="/stays" className="stays-button">
+                </div>
+                <div to="/stays" className="stays-button">
                     <img src={sleeping} className="sleep-img" alt="sleeping" />
                     Find Stays
-                </Link>
+                </div>
             </nav>
 
             <Link to="/" className="home">
