@@ -1,4 +1,3 @@
-// src/components/Flights-Hotel.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import airport from "../static/img/yousef-alfuhigi-bMIlyKZHKMY-unsplash.jpg";
@@ -7,8 +6,6 @@ import hotel from "../static/img/rakabtw_-M3YuHIpgmSY-unsplash.jpg";
 function FlightsHotels() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("stays");
-
-  // Состояния для полей
   const [fromTo, setFromTo] = useState("");
   const [trip, setTrip] = useState("round-trip");
   const [departReturn, setDepartReturn] = useState("");
@@ -19,15 +16,15 @@ function FlightsHotels() {
       const params = new URLSearchParams({
         from_to: fromTo || "New York - London",
         trip,
-        depart_return: departReturn || "2025-12-01 - 2025-12-15",
+        depart_return: departReturn || "2025-12-01 to 2025-12-15",
         passenger_class: passengerClass
       });
       navigate(`/flights?${params.toString()}`);
     } else {
       let adults = 2;
-      if (passengerClass.includes("1 guest")) adults = 1;
-      else if (passengerClass.includes("4 guests")) adults = 4;
-      else if (passengerClass.includes("6 guests")) adults = 6;
+      if (passengerClass.includes("1 adult")) adults = 1;
+      else if (passengerClass.includes("3 adults")) adults = 3;
+      else if (passengerClass.includes("4 adults")) adults = 4;
 
       const params = new URLSearchParams({
         q: fromTo || "Bali Resorts",
@@ -39,10 +36,9 @@ function FlightsHotels() {
 
   return (
     <>
-      {/* Форма поиска — 100% в стиле твоего CSS */}
       <div className="search">
         <div className="search-flex">
-          {/* Вкладки Flights / Stays */}
+
           <div className="head-buttons-flex">
             <button
               className="flights-button"
@@ -66,61 +62,64 @@ function FlightsHotels() {
             </button>
           </div>
 
-          {/* From - To */}
-          <div className="from-to">
-            <label>From - To</label>
-            <input
-              type="text"
-              placeholder={activeTab === "flights" ? "PEK - AUS" : "Bali, Paris..."}
-              value={fromTo}
-              onChange={(e) => setFromTo(e.target.value)}
-            />
+          <div className="search-fields-row">
+            {/* From - To */}
+            <div className="from-to">
+              <label>From - To</label>
+              <input
+                type="text"
+                placeholder={activeTab === "flights" ? "PEK - AUS" : "Bali..."}
+                value={fromTo}
+                onChange={(e) => setFromTo(e.target.value)}
+              />
+            </div>
+
+            <div className="trip">
+              <label>Trip</label>
+              <select
+                value={trip}
+                onChange={(e) => setTrip(e.target.value)}
+              >
+                <option value="one-way">One-way</option>
+                <option value="round-trip">Round-trip</option>
+              </select>
+            </div>
+
+            <div className="depart-return">
+              <label>Depart - Return</label>
+              <input
+                type="text"
+                placeholder="2025-12-01 to 2025-12-15"
+                value={departReturn}
+                onChange={(e) => setDepartReturn(e.target.value)}
+              />
+            </div>
+
+            <div className="passenger-class">
+              <label>Passenger - Class</label>
+              <select
+                value={passengerClass}
+                onChange={(e) => setPassengerClass(e.target.value)}
+              >
+                <option value="1 adult - Economy">1 adult - Economy</option>
+                <option value="2 adults - Economy">2 adults - Economy</option>
+                <option value="3 adults - Economy">3 adults - Economy</option>
+                <option value="4 adults - Economy">4 adults - Economy</option>
+                <option value="1 adult - Business">1 adult - Business</option>
+                <option value="2 adults - Business">2 adults - Business</option>
+              </select>
+            </div>
           </div>
 
-          {/* Trip */}
-          <div className="trip">
-            <label>Trip</label>
-            <input
-              type="text"
-              placeholder="Round-trip"
-              value={trip}
-              onChange={(e) => setTrip(e.target.value)}
-            />
-          </div>
-
-          {/* Depart - Return */}
-          <div className="depart-return">
-            <label>Depart - Return</label>
-            <input
-              type="text"
-              placeholder="2025-12-01 - 2025-12-15"
-              value={departReturn}
-              onChange={(e) => setDepartReturn(e.target.value)}
-            />
-          </div>
-
-          {/* Passenger - Class */}
-          <div className="passenger-class">
-            <label>Passenger - Class</label>
-            <input
-              type="text"
-              placeholder="2 adults - Economy"
-              value={passengerClass}
-              onChange={(e) => setPassengerClass(e.target.value)}
-            />
-          </div>
         </div>
 
-        {/* Кнопки внизу */}
-        <div className="bottom-buttons-flex">
-          <button className="promo-button">+ Add Promo Code</button>
+        <div className="bottom-buttons-flex-right">
           <button className="show-button" onClick={handleShow}>
             Show
           </button>
         </div>
       </div>
 
-      {/* Карточки */}
       <div className="flights-hotels-flex">
         <div className="airport-img">
           <img src={airport} className="airport-hotel-img" alt="Flights" />
