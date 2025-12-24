@@ -10,7 +10,6 @@ function Home() {
         <div className="home-screen">
             <Header /> 
             <GreetSection />
-            <SearchForm />
             <FlightsHotels />
             <Footer/>
         </div>
