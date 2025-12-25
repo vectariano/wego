@@ -46,23 +46,16 @@ function ListOfHotels() {
 
     return (
         <div className="flex-hotels-col">
-            <div style={{
+            <div className="sorting" style={{
                 display: "flex",
                 justifyContent: "flex-end",
-                margin: "1rem 0",
+                margin: "0rem 0",
                 padding: "0 1rem"
             }}>
-                <label style={{ marginRight: "0.5rem", fontWeight: "bold" }}>Sort by:</label>
-                <select
+                <label className="sort-label">Sort by:</label>
+                <select className="select-form"
                     value={sortOption}
                     onChange={(e) => setSortOption(e.target.value)}
-                    style={{
-                        padding: "0.4rem",
-                        borderRadius: "4px",
-                        border: "1px solid #ccc",
-                        fontSize: "0.95rem",
-                        minWidth: "180px"
-                    }}
                 >
                     <option value="rating">Highest rating</option>
                     <option value="price-low">Price: low to high</option>
@@ -98,7 +91,7 @@ function ListOfHotels() {
                                         </div>
                                     </div>
                                     <div className="hotel-rating">
-                                        <h2 className="rating">{hotel.overall_rating || "—"} ★</h2>
+                                        <h2 className="rating">{hotel.overall_rating || "—"}</h2>
                                         <h2 className="reviews">{hotel.reviews || 0} reviews</h2>
                                     </div>
                                 </div>
@@ -112,7 +105,7 @@ function ListOfHotels() {
                                     </div>
                                     <div className="book-item">
                                         <h1 className="hotel-price">
-                                            ${hotel.total_rate?.lowest || "—"}
+                                            {hotel.total_rate?.lowest || "—"}
                                         </h1>
                                         <Link to={`/hotel/${encodeURIComponent(hotelId)}`} className="bbooking-button">
                                             <span>Book now</span>
