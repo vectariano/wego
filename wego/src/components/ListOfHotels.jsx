@@ -4,25 +4,44 @@ import { Link, useLocation } from "react-router-dom";
 function ListOfHotels() {
     const [hotels, setHotels] = useState([]);
     const [sortOption, setSortOption] = useState("rating");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const location = useLocation();
 
-    const fetchHotels = async (adults) => {
+    const fetchHotels = async (destination, checkIn, checkOut, adults, rooms) => {
+        setLoading(true);
+        setError(null);
         try {
-            const response = await fetch(`/api/hotels/?adults=${adults}`);
+            const response = await fetch(
+                `/api/hotels/?destination=${encodeURIComponent(destination)}&check_in=${checkIn}&check_out=${checkOut}&adults=${adults}&rooms=${rooms}`
+            );
             const data = await response.json();
             if (Array.isArray(data)) {
                 setHotels(data);
                 localStorage.setItem("cachedHotels", JSON.stringify(data));
+            } else if (data.error) {
+                setError(data.error);
+                setHotels([]);
             }
         } catch (error) {
             console.error("Failed to fetch hotels:", error);
+            setError("Failed to load hotels. Please try again.");
+            setHotels([]);
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
+        const destination = urlParams.get("destination") || "Bali Resorts";
+        const checkIn = urlParams.get("check_in") || "2025-12-24";
+        const checkOut = urlParams.get("check_out") || "2025-12-26";
         const adults = urlParams.get("adults") || "2";
-        fetchHotels(adults);
+        const rooms = urlParams.get("rooms") || "1";
+        
+        console.log("Fetching hotels with params:", { destination, checkIn, checkOut, adults, rooms });
+        fetchHotels(destination, checkIn, checkOut, adults, rooms);
     }, [location.search]);
 
     const sortedHotels = useMemo(() => {
@@ -44,28 +63,49 @@ function ListOfHotels() {
         }
     }, [hotels, sortOption]);
 
+    if (loading) {
+        return <div style={{ textAlign: "center", padding: "2rem" }}>Loading hotels...</div>;
+    }
+
+    if (error) {
+        return <div style={{ textAlign: "center", padding: "2rem", color: "red" }}>{error}</div>;
+    }
+
     return (
         <div className="flex-hotels-col">
             <div className="sorting" style={{
                 display: "flex",
-                justifyContent: "flex-end",
-                margin: "0rem 0",
+                justifyContent: "space-between",
+                alignItems: "center",
+                margin: "1rem 0",
                 padding: "0 1rem"
             }}>
-                <label className="sort-label">Sort by:</label>
-                <select className="select-form"
-                    value={sortOption}
-                    onChange={(e) => setSortOption(e.target.value)}
-                >
-                    <option value="rating">Highest rating</option>
-                    <option value="price-low">Price: low to high</option>
-                    <option value="price-high">Price: high to low</option>
-                    <option value="name">Name (A–Z)</option>
-                </select>
+                <div>
+                    {hotels.length > 0 && (
+                        <span className="results-count">
+                            Found {hotels.length} hotels
+                        </span>
+                    )}
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <label className="sort-label">Sort by:</label>
+                    <select className="select-form"
+                        value={sortOption}
+                        onChange={(e) => setSortOption(e.target.value)}
+                    >
+                        <option value="rating">Highest rating</option>
+                        <option value="price-low">Price: low to high</option>
+                        <option value="price-high">Price: high to low</option>
+                        <option value="name">Name (A–Z)</option>
+                    </select>
+                </div>
             </div>
 
             {sortedHotels.length === 0 ? (
-                <p style={{ textAlign: "center", padding: "2rem" }}>No hotels available.</p>
+                <div style={{ textAlign: "center", padding: "2rem" }}>
+                    <p>No hotels available for your search criteria.</p>
+                    <p>Try changing your destination or dates.</p>
+                </div>
             ) : (
                 sortedHotels.map((hotel) => {
                     const hotelId = hotel.property_token;
