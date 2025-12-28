@@ -8,10 +8,16 @@ function ListingHeader() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/flights") {
+    const path = location.pathname;
+    
+    if (path.includes("/flight") || path === "/flights" || path.startsWith("/flight/")) {
       setActiveTab("flights");
-    } else if (location.pathname === "/hotels") {
+    } 
+    else if (path.includes("/hotel") || path === "/hotels" || path.startsWith("/hotel/")) {
       setActiveTab("stays");
+    }
+    else if (path === "/") {
+      setActiveTab("flights");
     }
   }, [location.pathname]);
 
@@ -22,7 +28,6 @@ function ListingHeader() {
 
   return (
     <header className="listing-header">
-
       <nav className="left-nav">
         <Link
           to="/flights"
@@ -41,7 +46,6 @@ function ListingHeader() {
           Find Stays
         </Link>
       </nav>
-
     
       <div className="logo-text">
         We<span className="logo-accent">G</span>o
