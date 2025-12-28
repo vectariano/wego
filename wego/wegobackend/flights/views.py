@@ -15,8 +15,8 @@ class FlightsViewSet(ViewSet):
             "engine": "google_flights",
             "departure_id": "PEK",
             "arrival_id": "AUS",
-            "outbound_date": "2025-12-27",
-            "return_date": "2025-12-28",
+            "outbound_date": "2026-01-03",
+            "return_date": "2026-01-05",
             "currency": "USD",
             "hl": "en",
             "api_key": os.getenv("SERP_API_KEY")

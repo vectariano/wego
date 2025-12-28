@@ -35,8 +35,8 @@ function ListOfHotels() {
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const destination = urlParams.get("destination") || "Bali Resorts";
-        const checkIn = urlParams.get("check_in") || "2025-12-24";
-        const checkOut = urlParams.get("check_out") || "2025-12-26";
+        const checkIn = urlParams.get("check_in") || "2025-12-29";
+        const checkOut = urlParams.get("check_out") || "2025-12-30";
         const adults = urlParams.get("adults") || "2";
         const rooms = urlParams.get("rooms") || "1";
         
@@ -80,13 +80,6 @@ function ListOfHotels() {
                 margin: "1rem 0",
                 padding: "0 1rem"
             }}>
-                <div>
-                    {hotels.length > 0 && (
-                        <span className="results-count">
-                            Found {hotels.length} hotels
-                        </span>
-                    )}
-                </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <label className="sort-label">Sort by:</label>
                     <select className="select-form"

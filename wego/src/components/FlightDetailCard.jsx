@@ -25,6 +25,25 @@ export default function FlightDetailCard({ flightId }) {
     }
   }, [flightId]);
 
+  const handleBookNow = () => {
+    if (!flight || !flight.flights || flight.flights.length === 0) return;
+
+    const firstLeg = flight.flights[0];
+    const lastLeg = flight.flights[flight.flights.length - 1];
+
+    const depId = firstLeg.departure_airport?.id;   
+    const arrId = lastLeg.arrival_airport?.id;     
+    const depDate = firstLeg.departure_airport?.time?.split(" ")[0]; 
+    const flightNumber = firstLeg.flight_number || "";
+    const airline = firstLeg.airline || "";
+
+    const query = `Flights to ${arrId} from ${depId} on ${depDate} ${flightNumber}`;
+
+    const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+
+    window.open(googleUrl, "_blank", "noopener,noreferrer");
+  };
+
   if (loading) return <div className="flight-detail-card-loading">Loading...</div>;
   if (!flight) return <div className="flight-detail-card-error">Flight not found</div>;
 
@@ -70,7 +89,7 @@ export default function FlightDetailCard({ flightId }) {
 
         <div className="flight-actions">
           <div className="price-tag">{price}</div>
-          <button className="btn-book">Book now</button>
+          <button className="btn-book" onClick={handleBookNow}>Book now</button>
         </div>
       </header>
 

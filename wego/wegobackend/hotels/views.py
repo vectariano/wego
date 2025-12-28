@@ -18,8 +18,8 @@ class HotelViewSet(ViewSet):
         
         # Получаем все параметры из запроса
         destination = request.query_params.get("destination", "Bali Resorts")
-        check_in = request.query_params.get("check_in", "2025-12-24")
-        check_out = request.query_params.get("check_out", "2025-12-26")
+        check_in = request.query_params.get("check_in", "2025-12-29")
+        check_out = request.query_params.get("check_out", "2025-12-30",)
         adults = request.query_params.get("adults", "2")
         rooms = request.query_params.get("rooms", "1")
         
@@ -82,7 +82,7 @@ class HotelViewSet(ViewSet):
         print(f">>> Sending request to SerpAPI: {full_url}")
 
         try:
-            response = requests.get(url, params=params, timeout=20)
+            response = requests.get(url, params=params, timeout=40)
             response.raise_for_status()
             data = response.json()
             

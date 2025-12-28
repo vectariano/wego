@@ -31,6 +31,21 @@ function HotelDetailCard({ hotelId }) {
         }
     }, [hotelId]);
 
+    const handleBookNow = (hotel) => {
+    if (!hotel) return;
+
+    const hotelName = hotel.name;
+    const checkIn = hotel.check_in_time;
+    const checkOut = hotel.check_out_time;
+    const adults = hotel.search_params?.adults || "2";
+
+    const query = `${hotelName} booking ${checkIn} to ${checkOut} for ${adults} adults`;
+
+    const googleUrl = `https://www.google.com/travel/hotels?q=${encodeURIComponent(query)}`;
+
+    window.open(googleUrl, "_blank", "noopener,noreferrer");
+  };
+
     if (loading) return <div className="hotel-detail-card-loading">Loading...</div>;
     if (!hotel) return <div className="hotel-detail-card-error">Hotel not found</div>;
 
@@ -94,15 +109,7 @@ function HotelDetailCard({ hotelId }) {
                     <div className="price-tag">{price}/night</div>
                     <button 
                         className="btn-book"
-                        onClick={() => {
-                            if (hasCoordinates) {
-                                const { latitude, longitude } = hotel.gps_coordinates;
-                                window.open(`https://www.google.com/maps?q=${latitude},${longitude}`, '_blank');
-                            } else {
-                                alert('Location not available for this hotel. Please try searching for another hotel.');
-                            }
-                        }}
-                    >
+                        onClick={() => handleBookNow(hotel)}>
                         Book now
                     </button>
                 </div>
