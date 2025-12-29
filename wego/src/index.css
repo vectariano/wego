@@ -1969,6 +1969,16 @@ input {
   align-items: center;
   height: 40px;
 }
+.flight-dates-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.flight-dates-group .flight-dates-input {
+  flex: 1;
+  width: 0; 
+}
 
 .flight-icon {
   width: 2em;
@@ -1981,10 +1991,22 @@ input {
 }
 
 .flight-from-to-input,
-.flight-dates-input,
 .flight-passengers-input {
   width: 100%;
   padding: 0 0.5rem 0 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  appearance: none;  
+  outline: none;
+  background: white;
+  height: 100%;
+  line-height: 1.5;
+}
+.flight-dates-input{
+  width: 100%;
+  padding: 0 0.5rem 0 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-family: "Montserrat", sans-serif;
