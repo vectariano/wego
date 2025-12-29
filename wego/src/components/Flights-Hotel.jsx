@@ -63,12 +63,11 @@ function FlightsHotels() {
           </div>
 
           <div className="search-fields-row">
-            {/* From - To */}
             <div className="from-to">
               <label>From - To</label>
               <input
                 type="text"
-                placeholder={activeTab === "flights" ? "PEK - AUS" : "Bali..."}
+                placeholder={activeTab === "flights" ? "PEK - LAX" : "Bali..."}
                 value={fromTo}
                 onChange={(e) => setFromTo(e.target.value)}
               />

@@ -2,19 +2,56 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import planeIcon from "../static/img/airplaneb.png";
-import calendarIcon from "../static/img/calendar.png";
 import userIcon from "../static/img/icon.png";
 import loopIcon from "../static/img/loop.png";
+import arrow from "../static/img/arrow.png";
 
 function FlightSearchBar() {
   const navigate = useNavigate();
-  const [fromTo, setFromTo] = useState("");
+  const [fromTo, setFromTo] = useState("PEK - LAX");
   const [tripType, setTripType] = useState("round-trip");
-  const [dates, setDates] = useState("");
-  const [passengers, setPassengers] = useState("1 adult, Economy");
+  const [departDate, setDepartDate] = useState("2026-02-01"); 
+  const [returnDate, setReturnDate] = useState("2026-02-11"); 
+  const [passengers, setPassengers] = useState("1 adult - Economy");
+
+  const getNextDay = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    date.setDate(date.getDate() + 1);
+    return date.toISOString().split('T')[0];
+  };
 
   const handleSearch = () => {
-    navigate("/flights");
+  let from = "", to = "";
+  if (fromTo.includes(" - ")) {
+    [from, to] = fromTo.split(" - ").map(s => s.trim());
+  } else {
+    from = fromTo.trim();
+    to = ""; 
+  }
+
+  const params = new URLSearchParams({
+    from,
+    to,
+    trip: tripType,
+    depart: departDate || "",
+    ...(tripType === "round-trip" && returnDate && { return: returnDate }),
+    passenger_class: passengers,
+  });
+
+  navigate(`/flights?${params.toString()}`);
+};
+
+  const handleDepartChange = (e) => {
+    const newDepart = e.target.value;
+    setDepartDate(newDepart);
+    if (tripType === "round-trip" && (!returnDate || newDepart >= returnDate)) {
+      setReturnDate(getNextDay(newDepart));
+    }
+  };
+
+  const handleReturnChange = (e) => {
+    setReturnDate(e.target.value);
   };
 
   return (
@@ -32,8 +69,7 @@ function FlightSearchBar() {
             />
           </div>
         </div>
-
-        <div className="flight-search-field">
+ <div className="flight-search-field">
           <div className="flight-input-with-icon">
             <img src={planeIcon} className="flight-icon" alt="Trip" />
             <select
@@ -43,34 +79,62 @@ function FlightSearchBar() {
             >
               <option value="round-trip">Round-trip</option>
               <option value="one-way">One-way</option>
-              <option value="multi-city">Multi-city</option>
             </select>
+            <img src={arrow} className="dropdown-arrow" alt="Expand" />
           </div>
         </div>
 
-        <div className="flight-search-field">
-          <div className="flight-input-with-icon">
-            <img src={calendarIcon} className="flight-icon" alt="Dates" />
-            <input
-              type="text"
-              placeholder="Depart - Return"
-              className="flight-dates-input"
-              value={dates}
-              onChange={(e) => setDates(e.target.value)}
-            />
-          </div>
-        </div>
+<div className="flight-search-field">
+  {tripType === "round-trip" ? (
+    <div className="flight-dates-group">
+      <div className="flight-input-with-icon">
+        <input
+          type="date"
+          value={departDate}
+          onChange={handleDepartChange}
+          className="flight-dates-input"
+          min={new Date().toISOString().split('T')[0]}
+        />
+      </div>
+      <div className="flight-input-with-icon">
+        <input
+          type="date"
+          value={returnDate}
+          onChange={handleReturnChange}
+          className="flight-dates-input"
+          min={getNextDay(departDate)}
+        />
+      </div>
+    </div>
+  ) : (
+    <div className="flight-input-with-icon">
+      <input
+        type="date"
+        value={departDate}
+        onChange={handleDepartChange}
+        className="flight-dates-input"
+        min={new Date().toISOString().split('T')[0]}
+      />
+    </div>
+  )}
+</div>
 
-        <div className="flight-search-field">
+       <div className="flight-search-field">
           <div className="flight-input-with-icon">
             <img src={userIcon} className="flight-icon" alt="Passengers" />
-            <input
-              type="text"
-              placeholder="1 adult, Economy"
+            <select
               className="flight-passengers-input"
               value={passengers}
               onChange={(e) => setPassengers(e.target.value)}
-            />
+            >
+              <option value="1 adult - Economy">1 adult - Economy</option>
+              <option value="2 adults - Economy">2 adults - Economy</option>
+              <option value="3 adults - Economy">3 adults - Economy</option>
+              <option value="4 adults - Economy">4 adults - Economy</option>
+              <option value="1 adult - Business">1 adult - Business</option>
+              <option value="2 adults - Business">2 adults - Business</option>
+            </select>
+            <img src={arrow} className="dropdown-arrow" alt="Expand" /> 
           </div>
         </div>
 

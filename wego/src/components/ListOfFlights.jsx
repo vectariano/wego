@@ -1,4 +1,3 @@
-// src/components/ListOfFlights.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -30,9 +29,35 @@ function ListOfFlights() {
         fetchFlights();
     }, [location.search]); 
 
+    const filteredFlights = useMemo(() => {
+        const params = new URLSearchParams(location.search);
+        const from = params.get("from")?.toUpperCase().trim();
+        const to = params.get("to")?.toUpperCase().trim();
+
+        if (!from || !to) {
+            return flights; 
+        }
+
+        return flights.filter(flight => {
+            const firstLeg = flight.flights?.[0];
+            if (!firstLeg) return false;
+
+            const depAirport = firstLeg.departure_airport;
+            const arrAirport = firstLeg.arrival_airport;
+
+            if (!depAirport || !arrAirport) return false;
+
+            
+            const routeText = `${depAirport.name} (${depAirport.id}) → ${arrAirport.name} (${arrAirport.id})`;
+
+            return routeText.toUpperCase().includes(`(${from})`) &&
+                   routeText.toUpperCase().includes(`(${to})`);
+        });
+    }, [flights, location.search]);
+
     const sortedFlights = useMemo(() => {
-        if (!flights.length) return [];
-        const sorted = [...flights];
+        if (!filteredFlights.length) return [];
+        const sorted = [...filteredFlights];
 
         const getPrice = (flight) => flight.price || 0;
         const getDuration = (flight) => flight.total_duration || 0;
@@ -49,17 +74,32 @@ function ListOfFlights() {
             default:
                 return sorted;
         }
-    }, [flights, sortOption]);
+    }, [filteredFlights, sortOption]);
+
+    const params = new URLSearchParams(location.search);
+    const from = params.get("from") || "";
+    const to = params.get("to") || "";
 
     return (
         <div className="flex-flights-col">
+            {from && to && (
+                <h2 className="search-header" style={{
+                    textAlign: "center",
+                    margin: "1rem 0",
+                    fontSize: "1.2rem",
+                    fontWeight: "600"
+                }}>
+                    Flights from <strong>{from}</strong> to <strong>{to}</strong>
+                </h2>
+            )}
+
             <div className="sorting" style={{
                 display: "flex",
                 justifyContent: "flex-end",
                 margin: "0rem 0",
                 padding: "0 1rem"
             }}>
-                <label className="sort-label" >Sort by:</label>
+                <label className="sort-label">Sort by:</label>
                 <select className="select-form"
                     value={sortOption}
                     onChange={(e) => setSortOption(e.target.value)}
@@ -72,7 +112,9 @@ function ListOfFlights() {
             </div>
 
             {sortedFlights.length === 0 ? (
-                <p style={{ textAlign: "center", padding: "2rem" }}>No flights available.</p>
+                <p style={{ textAlign: "center", padding: "2rem", color: "#666" }}>
+                    No flights found for {from} → {to}.
+                </p>
             ) : (
                 sortedFlights.map((flight) => {
                     const flightId = flight.id;
