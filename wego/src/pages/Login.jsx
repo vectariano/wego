@@ -17,8 +17,17 @@ function Login() {
                 body: JSON.stringify({ email, password })
             });
 
+            const data = await response.json();
+
             if (response.ok) {
-                alert('Login successful!');
+                const userData = {
+                    id: data.user?.id || Date.now(),
+                    name: data.user?.name || email.split('@')[0],
+                    email: email,
+                    token: data.token || 'default_token'
+                };
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                
                 window.location.href = '/';
             } else {
                 const data = await response.json();

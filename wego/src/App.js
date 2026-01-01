@@ -10,6 +10,7 @@ import HotelListing from './pages/HotelListing.jsx';
 import FlightsListing from './pages/FlightsListing.jsx';
 import Hotelinfo from './pages/Hotelinfo.jsx';
 import FlightInfo from './pages/FlightInfo.jsx';
+import UserAccount from './pages/UserAccount.jsx';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/flights" element={<FlightsListing />} />
         <Route path="/hotel/:id" element={<Hotelinfo />} />
         <Route path="/flight/:id" element={<FlightInfo />} />
+        <Route path="/account" element={<UserAccount />} />
       </Routes>
     </Router>
   );

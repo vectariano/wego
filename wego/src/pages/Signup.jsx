@@ -32,7 +32,6 @@ function SignUp() {
 
             const data = await response.json();
             if (response.ok) {
-                alert('Account created successfully!');
                 window.location.href = '/login';
             } else {
                 alert(`Error: ${data.error || 'Registration failed'}`);

@@ -42,14 +42,23 @@ function Header() {
                 </div>
             </nav>
 
-            <Link to="/" className="home">
+            {/* <Link to="/" className="home">
                 <img src={logo} className="main-logo" alt="logo" />
-            </Link>
+                
+            </Link> */}
+
+            <div className="main-logo">
+                <div className="logo-text" alt="logo">
+                    We<span className="logo-accent">G</span>o
+                </div>
+            </div>
 
             <div className="user-corner">
                 {isAuthenticated ? (
                     <>
-                        <span className="account">Account</span>
+                        <Link to="/account" className="account">
+                            Account
+                        </Link>
                         <button onClick={handleLogout} className="logout-button">
                             Logout
                         </button>

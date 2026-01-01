@@ -23,6 +23,149 @@ code {
     sans-serif;
 }
 
+.account-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.account-header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logout-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logout-button:hover {
+  background: #69c7b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.account-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: 0 1rem;
+}
+
+.account-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.account-section:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.account-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.account-section h2::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.favorite-card {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  border-color: #4CAF50;
+}
+
+.favorite-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.favorite-airline-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.favorite-title {
+  font-size: 1.1rem;
+  margin: 0.75rem 0;
+  padding: 0 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2c3e50;
+}
+
+.favorite-card:hover .favorite-title {
+  color: #4CAF50;
+}
+
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.hotel-card-flex, .flight-card-flex {
+    position: relative;
+}
+
 .sorting {
   display: flex;
   gap: 0.5rem;
@@ -50,11 +193,11 @@ code {
 
 .header-flex {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: absolute;
   width: 100%;
-  padding-top: 2em;
+  padding: 4em 0em;
   z-index: 2;
 }
 
@@ -65,7 +208,11 @@ code {
 }
 
 .main-logo {
-  height: 8em;
+  display: flex;
+  align-items: center; 
+  height: 100%; 
+  margin: 0 auto;
+
 }
 
 .left-flex-navigation {
@@ -1183,8 +1330,9 @@ input {
   }
 
   .main-logo {
-    height: 5em;
+    height: 8em;
   }
+  
 
   .plane-img,
   .sleep-img {
@@ -1601,7 +1749,7 @@ input {
 .logo-text {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 2.5em;
   color: #333;
   letter-spacing: -0.5px;
 }

@@ -21,10 +21,6 @@ function ListingHeader() {
     }
   }, [location.pathname]);
 
-  const user = {
-    name: "Tony S.",
-    avatar: "https://i.pinimg.com/originals/6e/2f/5f/6e2f5f95a7d6fad85d2eea30fb89c08e.jpg"
-  };
 
   return (
     <header className="listing-header">
@@ -55,11 +51,6 @@ function ListingHeader() {
         <Link to="/favourites" className="favourites-link">
           Favourites
         </Link>
-        <span className="separator">|</span>
-        <div className="user-profile">
-          <img src={user.avatar} className="avatar" alt="User" />
-          <span className="username">{user.name}</span>
-        </div>
       </div>
     </header>
   );

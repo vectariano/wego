@@ -4,8 +4,31 @@ import { Link, useLocation } from "react-router-dom";
 function ListOfFlights() {
     const [flights, setFlights] = useState([]);
     const [sortOption, setSortOption] = useState("price-low");
+    const [favorites, setFavorites] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const location = useLocation();
 
+    useEffect(() => {
+        const currentUser = localStorage.getItem('currentUser');
+        setIsAuthenticated(!!currentUser);
+    }, []);
+
+    useEffect(() => {
+        const savedFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
+        setFavorites(savedFavorites);
+    }, []);
+
+    const toggleFavorite = (flightId) => {
+        const newFavorites = favorites.includes(flightId)
+            ? favorites.filter(id => id !== flightId)
+            : [...favorites, flightId];
+        
+        localStorage.setItem('userFavorites', JSON.stringify(newFavorites));
+        setFavorites(newFavorites);
+    };
+
+    const isFavorite = (flightId) => favorites.includes(flightId);
+    
     const fetchFlights = async () => {
         try {
             const response = await fetch("/api/flights/");
@@ -82,7 +105,7 @@ function ListOfFlights() {
 
     return (
         <div className="flex-flights-col">
-            {from && to && (
+            {/* {from && to && (
                 <h2 className="search-header" style={{
                     textAlign: "center",
                     margin: "1rem 0",
@@ -91,7 +114,7 @@ function ListOfFlights() {
                 }}>
                     Flights from <strong>{from}</strong> to <strong>{to}</strong>
                 </h2>
-            )}
+            )} */}
 
             <div className="sorting" style={{
                 display: "flex",
@@ -133,6 +156,18 @@ function ListOfFlights() {
 
                     return (
                         <div key={flightId} className="flight-card-flex">
+                            {isAuthenticated && (
+                                <div 
+                                    className="favorite-icon" 
+                                    onClick={(e) => {
+                                        e.stopPropagation(); 
+                                        toggleFavorite(flightId);
+                                    }}
+                                    title={isFavorite(flightId) ? "Remove from favorites" : "Add to favorites"}
+                                >
+                                    {isFavorite(flightId) ? "❤️" : "♡"}
+                                </div>
+                            )}
                             <div className="flight-info-flex">
                                 <div className="card-head-flights">
                                     <div className="name-description">

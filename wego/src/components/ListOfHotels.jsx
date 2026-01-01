@@ -6,7 +6,31 @@ function ListOfHotels() {
     const [sortOption, setSortOption] = useState("rating");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [favorites, setFavorites] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const location = useLocation();
+
+    useEffect(() => {
+        const currentUser = localStorage.getItem('currentUser');
+        setIsAuthenticated(!!currentUser);
+    }, []);
+
+
+    useEffect(() => {
+        const savedFavorites = JSON.parse(localStorage.getItem('userFavorites')) || [];
+        setFavorites(savedFavorites);
+    }, []);
+
+    const toggleFavorite = (hotelId) => {
+        const newFavorites = favorites.includes(hotelId)
+            ? favorites.filter(id => id !== hotelId)
+            : [...favorites, hotelId];
+        
+        localStorage.setItem('userFavorites', JSON.stringify(newFavorites));
+        setFavorites(newFavorites);
+    };
+
+    const isFavorite = (hotelId) => favorites.includes(hotelId);
 
     const fetchHotels = async (destination, checkIn, checkOut, adults, rooms) => {
         setLoading(true);
@@ -105,6 +129,18 @@ function ListOfHotels() {
                     if (!hotelId) return null;
                     return (
                         <div key={hotelId} className="hotel-card-flex">
+                            {isAuthenticated && (
+                                <div 
+                                    className="favorite-icon" 
+                                    onClick={(e) => {
+                                        e.stopPropagation(); 
+                                        toggleFavorite(hotelId);
+                                    }}
+                                    title={isFavorite(hotelId) ? "Remove from favorites" : "Add to favorites"}
+                                >
+                                    {isFavorite(hotelId) ? "❤️" : "♡"}
+                                </div>
+                            )}
                             <img
                                 src={hotel.images?.[0]?.thumbnail}
                                 className="hotel-image"

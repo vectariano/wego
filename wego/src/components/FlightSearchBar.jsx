@@ -8,10 +8,10 @@ import arrow from "../static/img/arrow.png";
 
 function FlightSearchBar() {
   const navigate = useNavigate();
-  const [fromTo, setFromTo] = useState("PEK - LAX");
-  const [tripType, setTripType] = useState("round-trip");
-  const [departDate, setDepartDate] = useState("2026-02-01"); 
-  const [returnDate, setReturnDate] = useState("2026-02-11"); 
+  const [fromTo, setFromTo] = useState("PEK - AUS"); // Обновлено для примера из API
+  const [tripType, setTripType] = useState("Round trip");
+  const [departDate, setDepartDate] = useState("2026-01-03"); // Обновлено для примера из API
+  const [returnDate, setReturnDate] = useState("2026-01-05"); // Обновлено для примера из API
   const [passengers, setPassengers] = useState("1 adult - Economy");
 
   const getNextDay = (dateString) => {
@@ -22,36 +22,48 @@ function FlightSearchBar() {
   };
 
   const handleSearch = () => {
-  let from = "", to = "";
-  if (fromTo.includes(" - ")) {
-    [from, to] = fromTo.split(" - ").map(s => s.trim());
-  } else {
-    from = fromTo.trim();
-    to = ""; 
-  }
+    let from = "", to = "";
+    if (fromTo.includes(" - ")) {
+      [from, to] = fromTo.split(" - ").map(s => s.trim());
+    } else {
+      from = fromTo.trim();
+      to = ""; 
+    }
 
-  const params = new URLSearchParams({
-    from,
-    to,
-    trip: tripType,
-    depart: departDate || "",
-    ...(tripType === "round-trip" && returnDate && { return: returnDate }),
-    passenger_class: passengers,
-  });
+    const params = new URLSearchParams({
+      from,
+      to,
+      trip: tripType,
+      depart: departDate || "",
+      ...(tripType === "Round trip" && returnDate && { return: returnDate }),
+      passenger_class: passengers,
+    });
 
-  navigate(`/flights?${params.toString()}`);
-};
+    navigate(`/flights?${params.toString()}`);
+  };
 
   const handleDepartChange = (e) => {
     const newDepart = e.target.value;
     setDepartDate(newDepart);
-    if (tripType === "round-trip" && (!returnDate || newDepart >= returnDate)) {
+    if (tripType === "Round trip" && (!returnDate || newDepart >= returnDate)) {
       setReturnDate(getNextDay(newDepart));
     }
   };
 
   const handleReturnChange = (e) => {
     setReturnDate(e.target.value);
+  };
+
+  const handleTripTypeChange = (e) => {
+    const newTripType = e.target.value;
+    setTripType(newTripType);
+    // Если переключаемся на One way, сбрасываем дату возврата
+    if (newTripType === "One way") {
+      setReturnDate("");
+    } else if (!returnDate || departDate >= returnDate) {
+      // При переключении на Round trip устанавливаем дату возврата
+      setReturnDate(getNextDay(departDate));
+    }
   };
 
   return (
@@ -69,57 +81,58 @@ function FlightSearchBar() {
             />
           </div>
         </div>
- <div className="flight-search-field">
+        
+        <div className="flight-search-field">
           <div className="flight-input-with-icon">
             <img src={planeIcon} className="flight-icon" alt="Trip" />
             <select
               className="flight-trip-select"
               value={tripType}
-              onChange={(e) => setTripType(e.target.value)}
+              onChange={handleTripTypeChange}
             >
-              <option value="round-trip">Round-trip</option>
-              <option value="one-way">One-way</option>
+              <option value="Round trip">Round-trip</option>
+              <option value="One way">One-way</option>
             </select>
             <img src={arrow} className="dropdown-arrow" alt="Expand" />
           </div>
         </div>
 
-<div className="flight-search-field">
-  {tripType === "round-trip" ? (
-    <div className="flight-dates-group">
-      <div className="flight-input-with-icon">
-        <input
-          type="date"
-          value={departDate}
-          onChange={handleDepartChange}
-          className="flight-dates-input"
-          min={new Date().toISOString().split('T')[0]}
-        />
-      </div>
-      <div className="flight-input-with-icon">
-        <input
-          type="date"
-          value={returnDate}
-          onChange={handleReturnChange}
-          className="flight-dates-input"
-          min={getNextDay(departDate)}
-        />
-      </div>
-    </div>
-  ) : (
-    <div className="flight-input-with-icon">
-      <input
-        type="date"
-        value={departDate}
-        onChange={handleDepartChange}
-        className="flight-dates-input"
-        min={new Date().toISOString().split('T')[0]}
-      />
-    </div>
-  )}
-</div>
+        <div className="flight-search-field">
+          {tripType === "Round trip" ? (
+            <div className="flight-dates-group">
+              <div className="flight-input-with-icon">
+                <input
+                  type="date"
+                  value={departDate}
+                  onChange={handleDepartChange}
+                  className="flight-dates-input"
+                  min={new Date().toISOString().split('T')[0]}
+                />
+              </div>
+              <div className="flight-input-with-icon">
+                <input
+                  type="date"
+                  value={returnDate}
+                  onChange={handleReturnChange}
+                  className="flight-dates-input"
+                  min={getNextDay(departDate)}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flight-input-with-icon">
+              <input
+                type="date"
+                value={departDate}
+                onChange={handleDepartChange}
+                className="flight-dates-input"
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+          )}
+        </div>
 
-       <div className="flight-search-field">
+        <div className="flight-search-field">
           <div className="flight-input-with-icon">
             <img src={userIcon} className="flight-icon" alt="Passengers" />
             <select
