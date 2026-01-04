@@ -18,23 +18,22 @@ function FlightsHotels() {
   const [rooms, setRooms] = useState(1);
 
   const handleShowFlights = () => {
-    if (activeTab === "flights") {
-      // Извлекаем количество пассажиров из passengerClass
-      const passengers = parseInt(passengerClass);
-      
-      const params = new URLSearchParams({
-        from: fromTo.split("-")[0]?.trim() || "PEK",
-        to: fromTo.split("-")[1]?.trim() || "LAX",
-        trip,
-        depart_date: formatDate(departDate),
-        return_date: trip === "round-trip" ? formatDate(returnDate) : formatDate(departDate),
-        adults: passengers || 1,
-        class: passengerClass.includes("Business") ? "business" : "economy"
-      });
-      
-      navigate(`/flights?${params.toString()}`);
-    }
-  };
+  if (activeTab === "flights") {
+    const passengers = parseInt(passengerClass) || 2;
+
+    const params = new URLSearchParams({
+      from: fromTo.split("-")[0]?.trim() || "PEK",
+      to: fromTo.split("-")[1]?.trim() || "AUS",
+      trip: trip,
+      outbound_date: formatDate(departDate), 
+      ...(trip === "round-trip" && { return_date: formatDate(returnDate) }),
+      adults: passengers,
+      class: passengerClass.toLowerCase().includes("business") ? "business" : "economy"
+    });
+
+    navigate(`/flights?${params.toString()}`);
+  }
+};
 
   const handleShowHotels = () => {
     if (activeTab === "stays") {
@@ -115,7 +114,7 @@ function FlightsHotels() {
                   <label>From - To</label>
                   <input
                     type="text"
-                    placeholder="PEK - LAX"
+                    placeholder="PEK - AUS"
                     value={fromTo}
                     onChange={(e) => setFromTo(e.target.value)}
                   />

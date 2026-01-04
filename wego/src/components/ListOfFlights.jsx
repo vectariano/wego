@@ -31,7 +31,9 @@ function ListOfFlights() {
     
     const fetchFlights = async () => {
         try {
-            const response = await fetch("/api/flights/");
+            // Теперь передаём query-параметры из текущего URL в fetch (чтобы backend их использовал)
+            const queryParams = location.search; // Например, ?from=PEK&to=AUS&outbound_date=2026-02-15
+            const response = await fetch(`/api/flights/${queryParams}`);
             const data = await response.json();
 
             const allFlights = [...(data.best_flights || []), ...(data.other_flights || [])];
@@ -54,6 +56,7 @@ function ListOfFlights() {
 
     const filteredFlights = useMemo(() => {
         const params = new URLSearchParams(location.search);
+        // Используем 'from' и 'to' для совместимости, но в backend они departure_id и arrival_id — если нужно, переименуйте
         const from = params.get("from")?.toUpperCase().trim();
         const to = params.get("to")?.toUpperCase().trim();
 
@@ -62,19 +65,17 @@ function ListOfFlights() {
         }
 
         return flights.filter(flight => {
-            const firstLeg = flight.flights?.[0];
-            if (!firstLeg) return false;
+            const flightSegments = flight.flights;
+            if (!flightSegments || flightSegments.length === 0) return false;
 
-            const depAirport = firstLeg.departure_airport;
-            const arrAirport = firstLeg.arrival_airport;
+            // Теперь берём departure первого сегмента и arrival последнего (для рейсов с пересадками)
+            const depAirport = flightSegments[0].departure_airport;
+            const arrAirport = flightSegments[flightSegments.length - 1].arrival_airport;
 
             if (!depAirport || !arrAirport) return false;
 
-            
-            const routeText = `${depAirport.name} (${depAirport.id}) → ${arrAirport.name} (${arrAirport.id})`;
-
-            return routeText.toUpperCase().includes(`(${from})`) &&
-                   routeText.toUpperCase().includes(`(${to})`);
+            // Сравниваем напрямую по id (кодам аэропортов), без includes и routeText
+            return depAirport.id.toUpperCase() === from && arrAirport.id.toUpperCase() === to;
         });
     }, [flights, location.search]);
 
@@ -143,11 +144,13 @@ function ListOfFlights() {
                     const flightId = flight.id;
                     if (!flightId) return null;
 
+                    // Для отображения используем весь маршрут, но берём firstLeg только для деталей (airline, etc.)
                     const firstLeg = flight.flights?.[0];
                     if (!firstLeg) return null;
 
-                    const dep = firstLeg.departure_airport;
-                    const arr = firstLeg.arrival_airport;
+                    // dep и arr теперь для всего маршрута (для отображения)
+                    const dep = flight.flights[0].departure_airport;
+                    const arr = flight.flights[flight.flights.length - 1].arrival_airport;
                     const price = flight.price ? `$${flight.price.toLocaleString()}` : "—";
                     const durationMin = flight.total_duration || 0;
                     const hours = Math.floor(durationMin / 60);

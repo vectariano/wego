@@ -9,16 +9,24 @@ load_dotenv()
 
 class FlightsViewSet(ViewSet):
     def list(self, request):
-        # Убраны пробелы в URL!
+        # Теперь параметры берутся из query_params запроса (например, /api/flights/?departure_id=PEK&arrival_id=AUS&...)
+        # Дефолтные значения для тестирования
+        departure_id = request.query_params.get('departure_id', 'PEK').upper()
+        arrival_id = request.query_params.get('arrival_id', 'AUS').upper()
+        outbound_date = request.query_params.get('outbound_date', '2026-02-15')
+        return_date = request.query_params.get('return_date', '2026-02-16')
+        currency = request.query_params.get('currency', 'USD')
+        hl = request.query_params.get('hl', 'en')
+
         url = "https://serpapi.com/search.json"
         params = {
             "engine": "google_flights",
-            "departure_id": "PEK",
-            "arrival_id": "AUS",
-            "outbound_date": "2026-01-03",
-            "return_date": "2026-01-05",
-            "currency": "USD",
-            "hl": "en",
+            "departure_id": departure_id,
+            "arrival_id": arrival_id,
+            "outbound_date": outbound_date,
+            "return_date": return_date,
+            "currency": currency,
+            "hl": hl,
             "api_key": os.getenv("SERP_API_KEY")
         }
 
@@ -49,4 +57,3 @@ class FlightsViewSet(ViewSet):
             error_msg = f"Unexpected error: {e}"
             print(error_msg)
             return Response({"error": error_msg}, status=500)
-    
