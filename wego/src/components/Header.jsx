@@ -10,7 +10,7 @@ function Header() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/auth/me/', {
+                const res = await fetch('/api/auth/me/', {
                     credentials: 'include'
                 });
                 setIsAuthenticated(res.ok);
@@ -22,7 +22,7 @@ function Header() {
     }, []);
 
     const handleLogout = async () => {
-        await fetch('http://localhost:8000/api/auth/logout/', {
+        await fetch('/api/auth/logout/', {
             method: 'POST',
             credentials: 'include'
         });

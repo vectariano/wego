@@ -1,10 +1,8 @@
-# Dockerfile.backend (в корне)
 
 FROM python:3.12-slim
 
 WORKDIR /app
 
-# Копируем из вашей backend-директории
 COPY wegobackend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 

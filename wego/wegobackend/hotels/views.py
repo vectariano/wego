@@ -62,6 +62,7 @@ class HotelViewSet(ViewSet):
             return Response(_HOTELS_CACHE[cache_key])
 
         api_key = os.getenv("SERP_API_KEY")
+        print(f"Loaded API key: '{api_key}'") 
         if not api_key:
             return Response({"error": "API key not configured"}, status=500)
 

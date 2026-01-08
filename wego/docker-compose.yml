@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile.backend
     command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
     volumes:
-      - ./wegobackend:/app  # Измените на ./wegobackend:/app, если имя без "_"
+      - ./wegobackend:/app  
     ports:
       - "8000:8000"
     depends_on:
@@ -29,9 +29,9 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
-      SERP_API_KEY: your_key_here
+      SERP_API_KEY: 32f92fd0eef955aab7dc11900a8f9e833ab0f28ea020d678b18fc2639ec8d6d2
     env_file:
-      - wegobackend/.env  # Измените на wegobackend/.env, если нужно
+      - wegobackend/.env  
 
   frontend:
     build:

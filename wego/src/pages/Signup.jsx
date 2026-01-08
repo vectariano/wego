@@ -1,9 +1,11 @@
 // SignUp.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../static/img/dark-logo.png";
 import img from "../static/img/clay-banks-O5hfuVWgsS8-unsplash.jpg";
 
 function SignUp() {
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const firstName = document.querySelector('.first-name').value;
@@ -18,7 +20,7 @@ function SignUp() {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/auth/signup/', {
+            const response = await fetch('/api/auth/signup/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -32,7 +34,7 @@ function SignUp() {
 
             const data = await response.json();
             if (response.ok) {
-                window.location.href = '/login';
+                navigate('/login');
             } else {
                 alert(`Error: ${data.error || 'Registration failed'}`);
             }
@@ -88,11 +90,13 @@ function SignUp() {
                             <input className="confirm-password" type="password" required />
                         </div>
                     </div>
+
+                    <button className="signup-access-button">
+                        Create account
+                    </button>
                 </form>
 
-                <button className="signup-access-button" onClick={handleSubmit}>
-                    Create account
-                </button>
+                
             </section>
         </div>
     );

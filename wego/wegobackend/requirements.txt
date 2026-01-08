@@ -1,6 +1,7 @@
 django
 djangorestframework
 django-cors-headers
+freezegun==1.5.1
 requests
 python-dotenv
 psycopg2-binary 

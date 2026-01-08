@@ -33,7 +33,7 @@ function ListOfFlights() {
         try {
             // Теперь передаём query-параметры из текущего URL в fetch (чтобы backend их использовал)
             const queryParams = location.search; // Например, ?from=PEK&to=AUS&outbound_date=2026-02-15
-            const response = await fetch(`/api/flights/${queryParams}`);
+            const response = await fetch(`/api/flights/`);
             const data = await response.json();
 
             const allFlights = [...(data.best_flights || []), ...(data.other_flights || [])];

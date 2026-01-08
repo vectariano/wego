@@ -10,8 +10,8 @@ function FlightSearchBar() {
   const navigate = useNavigate();
   const [fromTo, setFromTo] = useState("PEK - AUS"); // Обновлено для примера из API
   const [tripType, setTripType] = useState("Round trip");
-  const [departDate, setDepartDate] = useState("2026-01-03"); // Обновлено для примера из API
-  const [returnDate, setReturnDate] = useState("2026-01-05"); // Обновлено для примера из API
+  const [departDate, setDepartDate] = useState("2026-02-12"); // Обновлено для примера из API
+  const [returnDate, setReturnDate] = useState("2026-02-13"); // Обновлено для примера из API
   const [passengers, setPassengers] = useState("1 adult - Economy");
 
   const getNextDay = (dateString) => {

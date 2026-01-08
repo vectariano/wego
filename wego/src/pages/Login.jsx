@@ -1,16 +1,18 @@
 // Login.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../static/img/dark-logo.png";
 import img from "../static/img/rakabtw_-M3YuHIpgmSY-unsplash.jpg";
 
 function Login() {
+    const navigate = useNavigate();
     const handleLogin = async (e) => {
         e.preventDefault();
         const email = document.querySelector('.email').value;
         const password = document.querySelector('.password').value;
 
         try {
-            const response = await fetch('http://localhost:8000/api/auth/login/', {
+            const response = await fetch('api/auth/login/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -28,7 +30,7 @@ function Login() {
                 };
                 localStorage.setItem('currentUser', JSON.stringify(userData));
                 
-                window.location.href = '/';
+                navigate('/');
             } else {
                 const data = await response.json();
                 alert('Login failed: ' + (data.error || 'Invalid email or password'));
