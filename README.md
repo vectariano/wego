@@ -34,10 +34,10 @@
   * Исходящий: Высокий, так как сервер отдает клиенту большие объемы данных: списки жилья, фотографии и тд.
 
 ### 1 диаграмма C4:
-<img src="diagrams/system-context-diagram.jpg" alt="system-context-diagram" height="500"/>
+<img src="diagrams/system-context-diagram.png" alt="system-context-diagram" height="500"/>
 
 ### 2 диаграмма C4:
-<img src="diagrams/container-diagram.jpg?update=1" alt="container-diagram" height="500"/>
+<img src="diagrams/container-diagram.png?update=1" alt="container-diagram" height="500"/>
 
 ### Контракты API
 * Бронирование отелей: 
